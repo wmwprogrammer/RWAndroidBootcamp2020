@@ -5,6 +5,7 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit.MINUTES
 
 class Employee(
+    id: String,
     firstName: String,
     lastName: String,
     email: String,
@@ -12,7 +13,7 @@ class Employee(
     val salary: Double,
     val socialSecurityNumber: String,
     val hireDate: String
-) : Person(firstName = firstName, lastName = lastName, email = email, phoneNumber = phoneNumber) {
+) : Person(id = id, firstName = firstName, lastName = lastName, email = email, phoneNumber = phoneNumber) {
 
     override fun toString(): String {
         return "${firstName} ${lastName} ${hireDate} ${salary}"
