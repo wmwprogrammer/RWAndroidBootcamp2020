@@ -24,6 +24,7 @@ fun main() {
         return deck
     }
 
+    // add check for too large a number of cards, or a negative value
     fun dealHand(deck: MutableSet<Card>, initialNumberOfCards: Int = 2): List<Card> {
         val hand = mutableListOf<Card>()
         for (index in 0 until initialNumberOfCards) {
