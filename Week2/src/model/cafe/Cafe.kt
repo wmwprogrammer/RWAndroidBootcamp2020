@@ -245,47 +245,51 @@ class Cafe {
 
   fun getAdoptedCats(): Set<Cat> {
     return setOf()
-    //TODO fix to return actual data
   }
 
-  fun getSponsoredCats(): Set<Cat> {
-    return setOf()
-    //TODO fix to return actual data
+  fun getSponsoredCatsIds(): Set<String> {
+    val sponsoredCatIds = mutableSetOf<String>()
+    sponsorships.forEach { sponsoredCatIds.addAll(listOf(it.catId)) }
+    return sponsoredCatIds
   }
 
   fun getMostPopularCats(): Set<Cat> {
     return setOf()
-    //TODO fix to return actual data
   }
 
   fun getTopSellingItems(): Set<Product> {
     return setOf()
-    //TODO fix to return actual data
   }
 
   fun getAdopters(): List<Person> {
     return (employees + customers).filter { it.cats.isNotEmpty() }
   }
 
+  fun getPotentialAdopter(id: String): Person {
+    return (employees + customers).filter { it.id == id }[0]
+  }
+
   fun printNumberOfCustomersFor(day: String) {
-    var employeeCount: Int = 0
-    var patronCount: Int = 0
+    var employeeCount = 0
+    var patronCount = 0
     val receiptForDay = receiptsByDay[day] ?: return // wrong day inserted!
 
 
     for (receipt in receiptForDay) {
       val id = receipt.customerId
-        patronCount++
+      patronCount++
       if (isEmployee(id)) {
         employeeCount++
       }
     }
-    println("On $day you had ${patronCount} customers. \n" +
-        "\t${employeeCount} of which were employees")
+    println(
+      "On $day you had ${patronCount} customers. \n" +
+          "\t${employeeCount} of which were employees"
+    )
   }
 
   fun printNumberOfNonEmployeePatronsFor(day: String) {
-    var patronCount: Int = 0
+    var patronCount = 0
     val receiptForDay = receiptsByDay[day] ?: return // wrong day inserted!
 
 

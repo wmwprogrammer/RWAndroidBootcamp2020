@@ -14,25 +14,31 @@ class CafeController {
   // shelter related things
   private val shelters = mutableSetOf<Shelter>(
     Shelter(
-      "1", "Shelter One", "", "", "", "", "",
-      mutableListOf(
-        Cat("1", "Cat One", "Tabby", "Orange", "Male", "1", ""),
-        Cat("2", "Cat Two", "Toyger", "brown/black", "Female", "1", "")
-
-      )
-    ),
+      "1", "Shelter One", "", "", "", "", ""),
     Shelter(
-      "2", "Shelter Two", "", "", "", "", "",
-      mutableListOf(
-        Cat("3", "Cat Three", "Cheshire", "Purple", "Female", "1", ""),
-        Cat("4", "Cat Four", "Tabby", "orange", "Female", "2", ""),
-        Cat("5", "Cat Five", "Birman", "blue-cream tortie", "Female", "2", "")
-      )
+      "2", "Shelter Two", "", "", "", "", "")
+  )
+
+  private val shelterToCat = mutableMapOf<Shelter, MutableSet<Cat>>(
+    shelters.elementAt(0) to mutableSetOf(
+      Cat("1", "Cat One", "Tabby", "Orange", "Male", "1", ""),
+      Cat("2", "Cat Two", "Toyger", "brown/black", "Female", "1", ""),
+      Cat("6", "Cat Six", "Toyger", "brown/black", "Female", "1", "")
+    ),
+    shelters.elementAt(1) to mutableSetOf(
+      Cat("3", "Cat Three", "Cheshire", "Purple", "Female", "2", ""),
+      Cat("4", "Cat Four", "Tabby", "orange", "Female", "2", ""),
+      Cat("5", "Cat Five", "Birman", "blue-cream tortie", "Female", "2", "")
     )
   )
-  private val shelterToCat = mutableMapOf<Shelter, MutableSet<Cat>>()
+  
+//  val breeds = shelterToCat.get(shelters.first())?.fold(mutableSetOf<String>()) { acc, cat ->
+//    acc.add(cat.breed)
+//    return@fold acc
+//  }
 
-  fun adoptCat(catId: String, person: Person) {
+  fun adoptCat(catId: String, personId: String) {
+    val person = cafe.getPotentialAdopter(personId)
     // check if cats exist, and retrieve its entry!
     val catInShelter = shelterToCat.entries.firstOrNull { (_, catsInShelter) ->
       catsInShelter.any { it.id == catId }
@@ -76,16 +82,41 @@ class CafeController {
    *
    * */
   fun getNumberOfAdoptionsPerShelter(): Map<String, Int> {
+    val shelterMap: MutableMap<String, Int> = mutableMapOf()
     val allAdopters = cafe.getAdopters()
     if (allAdopters.isEmpty()) return mapOf()
-
-    return mapOf()
+    for (adopter in allAdopters) {
+      val catsCount = adopter.cats.size
+      for (cat in adopter.cats) {
+        val shelterList = shelters.filter { it.id == cat.shelterId }
+        shelterList.forEach { shelterMap.put(it.name, catsCount) }
+      }
+    }
+    return shelterMap
   }
 
   fun getUnadoptedCats(): Set<Cat> {
-    // TODO finish the method to actually return unadopted cats
-    return setOf();
+    val unadoptedCats = mutableSetOf<Cat>()
+    shelterToCat.forEach { unadoptedCats.addAll(it.value)}
+    return unadoptedCats
   }
 
+  fun getSponsoredUnadoptedCats(): MutableSet<Cat> {
+    val sponsoredCatids = cafe.getSponsoredCatsIds()
+    val sponsoredCats = mutableSetOf<Cat>()
+    shelterToCat.forEach {
+      it.value.forEach() {
+        if (it.id in sponsoredCatids) sponsoredCats.add(it)}
+    }
+    return sponsoredCats
+  }
 
+  fun getPopularItems(): Set<Product> {
+    return cafe.getTopSellingItems()
+
+  }
+
+  fun getPopularCats(): Set<Cat> {
+    return cafe.getMostPopularCats()
+  }
 }
