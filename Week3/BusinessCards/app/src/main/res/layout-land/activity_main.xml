@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="258dp"
+        android:layout_height="112dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/aaa_electronics_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/my_logo" />
+
+    <TextView
+        android:id="@+id/nameLabelTextView"
+        android:layout_width="@dimen/labelWidth"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:labelFor="@id/nameTextView"
+        android:text="@string/name_label"
+        android:textColor="@color/labelForegroundColor"
+        app:layout_constraintBottom_toTopOf="@+id/addressLabelTextView"
+        app:layout_constraintEnd_toStartOf="@+id/nameTextView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:text="@string/name"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/addressTextView"
+        app:layout_constraintStart_toEndOf="@+id/nameLabelTextView" />
+
+    <TextView
+        android:id="@+id/addressLabelTextView"
+        android:layout_width="@dimen/labelWidth"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:labelFor="@id/addressTextView"
+        android:text="@string/address_label"
+        android:textColor="@color/labelForegroundColor"
+        app:layout_constraintBottom_toTopOf="@+id/locationLabelTextView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:text="@string/address"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/locationTextView"
+        app:layout_constraintStart_toEndOf="@+id/addressLabelTextView" />
+
+    <TextView
+        android:id="@+id/locationLabelTextView"
+        android:layout_width="@dimen/labelWidth"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:labelFor="@id/locationTextView"
+        android:text="@string/location_label"
+        android:textColor="@color/labelForegroundColor"
+        app:layout_constraintBottom_toTopOf="@+id/phoneNumberLabelTextView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:text="@string/location"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/phoneNumberTextView"
+        app:layout_constraintStart_toEndOf="@+id/locationLabelTextView" />
+
+    <TextView
+        android:id="@+id/phoneNumberTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:text="@string/phone"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toTopOf="@+id/emailAddressTextView"
+        app:layout_constraintStart_toEndOf="@+id/phoneNumberLabelTextView" />
+
+    <TextView
+        android:id="@+id/emailAddressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="casual"
+        android:text="@string/email_address"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/emailAddressLabelTextView" />
+
+    <TextView
+        android:id="@+id/emailAddressLabelTextView"
+        android:layout_width="@dimen/labelWidth"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="casual"
+        android:labelFor="@id/emailAddressTextView"
+        android:text="@string/email_address_label"
+        android:textColor="@color/labelForegroundColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/phoneNumberLabelTextView"
+        android:layout_width="@dimen/labelWidth"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="casual"
+        android:labelFor="@id/phoneNumberTextView"
+        android:text="@string/phoneNumberLabel"
+        android:textColor="@color/labelForegroundColor"
+        app:layout_constraintBottom_toTopOf="@+id/emailAddressLabelTextView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
