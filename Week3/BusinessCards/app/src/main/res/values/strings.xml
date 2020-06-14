@@ -1,14 +1,3 @@
 <resources>
-    <string name="app_name">Business Card</string>
-    <string name="name">Warren Woellhaf</string>
-    <string name="address">67 W. Lawrence Street</string>
-    <string name="location">Ogden, UT  84404</string>
-    <string name="phone">(895) 633–2756</string>
-    <string name="email_address">warren.woellhaf@aaaelectronics.com</string>
-    <string name="aaa_electronics_logo">AAA Electronics Logo</string>
-    <string name="email_address_label">Email:</string>
-    <string name="phoneNumberLabel">Phone:</string>
-    <string name="address_label">Address:</string>
-    <string name="location_label">Location: </string>
-    <string name="name_label">"Name: "</string>
+    <string name="app_name">Business Cards</string>
 </resources>
