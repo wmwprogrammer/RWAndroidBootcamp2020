@@ -11,4 +11,9 @@
     <string name="address_label">Address:</string>
     <string name="location_label">Location: </string>
     <string name="name_label">"Name: "</string>
+    <string name="reminderText">"V = I x R"</string>
+    <string name="reminderButtonText">Change Reminder</string>
+    <string name="aboutMenu">About</string>
+    <string name="aboutTitle">Business Card</string>
+    <string name="aboutMessage">Created by Warren Woellhaf\nProud member of Team Kittens!</string>
 </resources>

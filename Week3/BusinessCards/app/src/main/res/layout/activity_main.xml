@@ -140,4 +140,35 @@
         app:layout_constraintBottom_toTopOf="@+id/emailAddressLabelTextView"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/reminderTextView"
+        android:layout_width="@dimen/reminderTextWidth"
+        android:layout_height="@dimen/reminderTextHeight"
+        android:layout_marginStart="@dimen/reminderTextMarginStart"
+        android:layout_marginTop="@dimen/reminderTextMarginTop"
+        android:layout_marginEnd="@dimen/reminderTextMarginEnd"
+        android:background="@color/colorPrimary"
+        android:fontFamily="casual"
+        android:includeFontPadding="true"
+        android:text="@string/reminderText"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/reminderTextSize"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/changeReminderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/reminderButtonText"
+        app:layout_constraintBottom_toTopOf="@+id/nameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/reminderTextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
