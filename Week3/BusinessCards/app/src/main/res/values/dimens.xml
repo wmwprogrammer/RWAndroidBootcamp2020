@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="labelWidth">65dp</dimen>
+    <dimen name="reminderTextWidth">390dp</dimen>
+    <dimen name="reminderTextHeight">200dp</dimen>
+    <dimen name="reminderTextMarginStart">8dp</dimen>
+    <dimen name="reminderTextMarginTop">32dp</dimen>
+    <dimen name="reminderTextMarginEnd">8dp</dimen>
+    <dimen name="reminderTextSize">40sp</dimen>
+    <dimen name="imageWidth">258dp</dimen>
+    <dimen name="imageHeight">112dp</dimen>
+    <dimen name="image_layout_margin_start">16dp</dimen>
+    <dimen name="image_layout_margin_top">16dp</dimen>
+    <dimen name="layout_margin_start_medium">16dp</dimen>
+    <dimen name="layout_margin_bottom_small">4dp</dimen>
+    <dimen name="layout_margin_bottom_medium">16dp</dimen>
+</resources>
