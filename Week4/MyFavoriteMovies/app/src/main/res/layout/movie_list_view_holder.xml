@@ -5,6 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <!-- hint says to use 0dp instead of '@dimen/smallest_layout_width' for better performance
+    on layout_width -->
+
     <TextView
         android:id="@+id/movieTextView"
         android:layout_width="0dp"
