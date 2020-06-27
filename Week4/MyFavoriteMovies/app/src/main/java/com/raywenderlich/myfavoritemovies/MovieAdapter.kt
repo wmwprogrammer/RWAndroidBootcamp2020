@@ -1,6 +1,5 @@
 package com.raywenderlich.myfavoritemovies
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -72,9 +71,7 @@ class MovieAdapter : Adapter<MovieViewHolder>() {
         return MovieViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return movies.size
-    }
+    override fun getItemCount() = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         holder.movieTextView.text = movies[position].title
@@ -85,7 +82,7 @@ class MovieAdapter : Adapter<MovieViewHolder>() {
             0
         )
         holder.movieTextView.setOnClickListener {
-            val intent = Intent(it.context, DetailActivity::class.java)
+            val intent = DetailActivity.getIntent(it.context)
             intent.putExtra(MOVIE_KEY, movies[position])
             it.context.startActivity(intent)
         }

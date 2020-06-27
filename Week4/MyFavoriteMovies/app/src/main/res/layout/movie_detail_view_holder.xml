@@ -29,7 +29,7 @@
 
     <TextView
         android:id="@+id/genreTextView"
-        android:layout_width="@dimen/smallest_layout_width"
+        android:layout_width="0dp"
         android:layout_height="@dimen/detail_label_height"
         android:layout_margin="@dimen/layout_margin_small"
         app:layout_constraintStart_toEndOf="@+id/genre_label_textview"
@@ -46,7 +46,7 @@
 
     <TextView
         android:id="@+id/releaseDateTextView"
-        android:layout_width="@dimen/smallest_layout_width"
+        android:layout_width="0dp"
         android:layout_height="@dimen/detail_label_height"
         android:layout_margin="@dimen/layout_margin_small"
         app:layout_constraintStart_toEndOf="@+id/release_date_label_textview"
@@ -63,8 +63,8 @@
 
     <TextView
         android:id="@+id/movieSummaryTextView"
-        android:layout_width="@dimen/smallest_layout_width"
-        android:layout_height="@dimen/smallest_layout_height"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/layout_margin_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

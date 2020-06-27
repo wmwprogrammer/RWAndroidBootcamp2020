@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        movies_recyclerview.layoutManager = LinearLayoutManager(this)
-        movies_recyclerview.adapter = MovieAdapter()
+        moviesRecyclerView.layoutManager = LinearLayoutManager(this)
+        moviesRecyclerView.adapter = MovieAdapter()
     }
 }

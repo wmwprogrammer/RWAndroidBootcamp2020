@@ -7,9 +7,9 @@
     tools:context=".DetailActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/movie_detail_recyclerview"
-        android:layout_width="@dimen/smallest_layout_width"
-        android:layout_height="@dimen/smallest_layout_height"
+        android:id="@+id/movieDetailRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
