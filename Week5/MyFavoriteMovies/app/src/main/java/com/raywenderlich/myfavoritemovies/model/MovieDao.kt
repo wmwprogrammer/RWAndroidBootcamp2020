@@ -12,7 +12,7 @@ interface MovieDao {
     fun insert(movie: Movie)
 
     @Delete
-    fun deleteMovie(vararg movie: Movie)
+    fun deleteMovies(vararg movie: Movie)
 
     @Query("SELECT * FROM movies_table ORDER BY title ASC")
     fun getAllMovies(): LiveData<List<Movie>>
