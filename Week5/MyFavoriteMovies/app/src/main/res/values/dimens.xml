@@ -7,4 +7,6 @@
     <dimen name="detail_image_height">343dp</dimen>
     <dimen name="detail_label_height">20dp</dimen>
     <dimen name="detail_label_width">110dp</dimen>
+    <dimen name="login_field_layout_width">300dp</dimen>
+    <dimen name="login_layout_top">300dp</dimen>
 </resources>
