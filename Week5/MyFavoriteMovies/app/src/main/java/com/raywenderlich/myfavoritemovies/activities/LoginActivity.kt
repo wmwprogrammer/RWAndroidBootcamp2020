@@ -6,47 +6,65 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.raywenderlich.myfavoritemovies.R
+import com.raywenderlich.myfavoritemovies.onClick
+import com.raywenderlich.myfavoritemovies.repository.UserRepository
+import com.raywenderlich.myfavoritemovies.validators.CredentialsValidator
 import kotlinx.android.synthetic.main.activity_login.*
 
+fun startLoginActivity(from: Context) = from.startActivity(Intent(from, LoginActivity::class.java))
+
 class LoginActivity : AppCompatActivity() {
+    private val credentialsValidator by lazy { CredentialsValidator() }
+    private val userRepository by lazy { UserRepository() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val sharedPrefs =
-            getSharedPreferences(MainActivity.LOGGED_IN_STATUS_KEY, Context.MODE_PRIVATE)
-        val isLoggedIn = sharedPrefs.getBoolean(MainActivity.IS_LOGGED_IN, false)
+        checkIfUserLoggedIn()
+        //used this method from the solution to avoid setting up a click listener every time
+        loginButton.onClick { checkCredentials() }
+    }
 
-        if (isLoggedIn) startMainActivity()
-
-        loginButton.setOnClickListener {
-            if (validateData()) {
-                sharedPrefs.edit().putBoolean(MainActivity.IS_LOGGED_IN, true).apply()
-            }
+    private fun checkIfUserLoggedIn() {
+        if (userRepository.isUserLoggedIn()) {
+            startMainActivity()
         }
     }
 
-    private fun validateData(): Boolean {
-        if (usernameEditText.text.isEmpty() || passwordEditText.text.isEmpty()) {
-            Toast.makeText(
-                this, "Username/Password cannot be empty. Please fill out all fields",
-                Toast.LENGTH_LONG
-            ).show()
-            return false
-        } else if (usernameEditText.text.length < 8 || passwordEditText.text.length < 8) {
-            Toast.makeText(
-                this, "Username/Password must be more than 8 or greater characters",
-                Toast.LENGTH_LONG
-            ).show()
-            return false
-        } else {
+    private fun checkCredentials() {
+        credentialsValidator.setCredentials(
+            usernameEditText.text.toString(),
+            passwordEditText.text.toString()
+        )
+
+        toggleUsernameState()
+        togglePasswordState()
+
+        if (credentialsValidator.areCredentialsValid()) {
+            userRepository.setUserLoggedIn(true)
             startMainActivity()
-            return true
         }
+    }
+
+    private fun toggleUsernameState() {
+        if (!credentialsValidator.isUsernameValid()) {
+            showErrorToast("Username cannot be less than 8 characters")
+        }
+    }
+
+    private fun togglePasswordState() {
+        if (!credentialsValidator.isPasswordValid()) {
+            showErrorToast("Password must be greater than 8 characters")
+        }
+    }
+
+    private fun showErrorToast(toastText: String) {
+        Toast.makeText(this, toastText, Toast.LENGTH_LONG).show()
     }
 
     private fun startMainActivity() {
-        val login = Intent(this, MainActivity::class.java)
-        startActivity(login)
+        startMainActivity(this)
+        finish()        //stop the login activity, so that it does not show when hitting back
     }
 }

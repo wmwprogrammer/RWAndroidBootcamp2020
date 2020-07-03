@@ -7,13 +7,15 @@ import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.model.Movie
 import com.raywenderlich.myfavoritemovies.model.MovieViewHolder
 
-class MovieAdapter(
-    private val movies: MutableList<Movie>,
-    private val movieClickListener: MovieDetailListener
-) : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieAdapter(private val onMovieClicked: (Movie) -> Unit) :
+    RecyclerView.Adapter<MovieViewHolder>() {
 
-    interface MovieDetailListener {
-        fun movieItemClicked(movie: Movie)
+    private val movies = mutableListOf<Movie>()
+
+    fun setMovies(movies: List<Movie>) {
+        this.movies.clear()
+        this.movies.addAll(movies)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -25,9 +27,6 @@ class MovieAdapter(
     override fun getItemCount() = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movies[position])
-        holder.itemView.setOnClickListener {
-            movieClickListener.movieItemClicked(movies[position])
-        }
+        holder.bind(movies[position], onMovieClicked)
     }
 }

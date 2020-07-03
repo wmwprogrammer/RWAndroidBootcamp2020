@@ -10,38 +10,36 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.adapters.MovieAdapter
-import com.raywenderlich.myfavoritemovies.data.DummyData
+import com.raywenderlich.myfavoritemovies.data.DummyData.movies
 import com.raywenderlich.myfavoritemovies.model.Movie
+import com.raywenderlich.myfavoritemovies.model.MovieRepository
+import com.raywenderlich.myfavoritemovies.repository.UserRepository
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MovieAdapter.MovieDetailListener {
-    companion object {
-        const val MOVIE_DETAILS = "movie_details"
-        const val IS_LOGGED_IN = "isLoggedIn"
-        const val LOGGED_IN_STATUS_KEY = "loggedInStatus"
-    }
+fun startMainActivity(from: Context) = from.startActivity(Intent(from, MainActivity::class.java))
+
+class MainActivity : AppCompatActivity() {
+
+    private val movieRepository by lazy { MovieRepository() }
+    private val userRepository by lazy { UserRepository() }
+    private val movieAdapter by lazy { MovieAdapter(::movieItemClicked) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPrefs =
-            getSharedPreferences(LOGGED_IN_STATUS_KEY, Context.MODE_PRIVATE)
-        val isLoggedIn = sharedPrefs.getBoolean(IS_LOGGED_IN, false)
-
-        if (!isLoggedIn) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-        } else {
-            moviesRecyclerView.layoutManager = LinearLayoutManager(this)
-            moviesRecyclerView.adapter = MovieAdapter(DummyData.movies, this)
-        }
+        movieRepository.storeMoviesIfNotEmpty(movies)
+        fillMovieList()
     }
 
-    override fun movieItemClicked(movie: Movie) {
-        val movieItem = Intent(this, DetailActivity::class.java)
-        movieItem.putExtra(MOVIE_DETAILS, movie)
-        startActivity(movieItem)
+    private fun fillMovieList() {
+        moviesRecyclerView.layoutManager = LinearLayoutManager(this)
+        moviesRecyclerView.adapter = movieAdapter
+        movieAdapter.setMovies(movieRepository.getAllMovies())
+    }
+
+    private fun movieItemClicked(movie: Movie) {
+        startDetailActivity(this, movie.id)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -51,14 +49,15 @@ class MainActivity : AppCompatActivity(), MovieAdapter.MovieDetailListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val sharedPrefs = getSharedPreferences(LOGGED_IN_STATUS_KEY, Context.MODE_PRIVATE)
-        sharedPrefs.edit().putBoolean(IS_LOGGED_IN, false).apply()
-        logout()
-        return true
+        if (item.itemId == R.id.logoutMenuItem) {
+            userRepository.setUserLoggedIn(false)
+            navigateToLogin()
+        }
+        return false
     }
 
-    private fun logout() {
-        val intent = Intent(this, LoginActivity::class.java)
-        startActivity(intent)
+    private fun navigateToLogin() {
+        startLoginActivity(this)
+        finish()
     }
 }
