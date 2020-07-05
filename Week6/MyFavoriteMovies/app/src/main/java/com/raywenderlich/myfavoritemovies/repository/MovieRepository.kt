@@ -1,6 +1,7 @@
-package com.raywenderlich.myfavoritemovies.model
+package com.raywenderlich.myfavoritemovies.repository
 
 import com.raywenderlich.myfavoritemovies.App
+import com.raywenderlich.myfavoritemovies.model.Movie
 
 class MovieRepository {
 
@@ -10,14 +11,9 @@ class MovieRepository {
 
     fun getMovieById(movieId: Int?) = dao.getMovieById(movieId)
 
-    private fun saveMovies(movies: List<Movie>) = dao.insertMovies(movies)
-
     fun storeMoviesIfNotEmpty(movies: List<Movie>) {
         if (getAllMovies().count() < 1) saveMovies(movies)
     }
 
-//    fun addMovie(movie: Movie)
-//    fun getAllMovies(): LiveData<List<Movie>>
-//    fun deleteMovies(movie: Movie)
-//    fun deleteAllMovies()
+    private fun saveMovies(movies: List<Movie>) = dao.insertMovies(movies)
 }

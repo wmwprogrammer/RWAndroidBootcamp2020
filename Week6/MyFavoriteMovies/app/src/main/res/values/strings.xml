@@ -4,7 +4,6 @@
     <string name="genreLabel">Genre:</string>
     <string name="release_date_label">Release Date:</string>
     <string name="movieSummaryLabel">Movie Summary:</string>
-    <string name="loginLabelText">Enter Login Information</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="loginButtonText">Login</string>

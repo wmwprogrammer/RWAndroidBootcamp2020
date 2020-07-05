@@ -7,15 +7,19 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.adapters.MovieAdapter
 import com.raywenderlich.myfavoritemovies.data.DummyData.movies
 import com.raywenderlich.myfavoritemovies.model.Movie
-import com.raywenderlich.myfavoritemovies.model.MovieRepository
+import com.raywenderlich.myfavoritemovies.repository.MovieRepository
 import com.raywenderlich.myfavoritemovies.repository.UserRepository
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
+//this came from the solution
 fun startMainActivity(from: Context) = from.startActivity(Intent(from, MainActivity::class.java))
 
 class MainActivity : AppCompatActivity() {
@@ -28,14 +32,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        movieRepository.storeMoviesIfNotEmpty(movies)
+        lifecycleScope.launch(Dispatchers.IO) {
+            movieRepository.storeMoviesIfNotEmpty(movies)
+        }
         fillMovieList()
     }
 
     private fun fillMovieList() {
         moviesRecyclerView.layoutManager = LinearLayoutManager(this)
         moviesRecyclerView.adapter = movieAdapter
-        movieAdapter.setMovies(movieRepository.getAllMovies())
+        lifecycleScope.launch(Dispatchers.IO) {
+            movieAdapter.setMovies(movieRepository.getAllMovies())
+        }
     }
 
     private fun movieItemClicked(movie: Movie) {
