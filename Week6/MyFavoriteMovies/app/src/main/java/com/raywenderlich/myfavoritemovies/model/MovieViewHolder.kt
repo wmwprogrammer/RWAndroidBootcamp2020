@@ -8,11 +8,16 @@ import kotlinx.android.synthetic.main.movie_list_view_holder.view.*
 class MovieViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
     LayoutContainer {
 
-    fun bind(movie: Movie, onMovieClick: (Movie) -> Unit) = with(containerView) {
+    fun bind(
+        movie: Movie,
+        onMovieClick: (Movie) -> Unit,
+        onMovieLongClicked: (Movie) -> Boolean
+    ) = with(containerView) {
         movieTextView.text = movie.title
         movieTextView.setCompoundDrawablesWithIntrinsicBounds(
             movie.poster, 0, 0, 0
         )
         rootView.setOnClickListener { onMovieClick(movie) }
+        rootView.setOnLongClickListener { onMovieLongClicked(movie) }
     }
 }

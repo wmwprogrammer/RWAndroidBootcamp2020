@@ -5,7 +5,7 @@ import com.raywenderlich.myfavoritemovies.model.Movie
 
 class MovieRepository {
 
-    private val dao = App.movieDb.movieDao()
+    fun deleteMovieById(movieId: Int) = dao.deleteMovieById(movieId)
 
     fun getAllMovies(): List<Movie> = dao.getAllMovies()
 
@@ -15,5 +15,6 @@ class MovieRepository {
         if (getAllMovies().count() < 1) saveMovies(movies)
     }
 
+    private val dao = App.movieDb.movieDao()
     private fun saveMovies(movies: List<Movie>) = dao.insertMovies(movies)
 }

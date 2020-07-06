@@ -7,7 +7,10 @@ import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.model.Movie
 import com.raywenderlich.myfavoritemovies.model.MovieViewHolder
 
-class MovieAdapter(private val onMovieClicked: (Movie) -> Unit) :
+class MovieAdapter(
+    private val onMovieClicked: (Movie) -> Unit,
+    private val onMovieLongClicked: (Movie) -> Boolean
+) :
     RecyclerView.Adapter<MovieViewHolder>() {
 
     private val movies = mutableListOf<Movie>()
@@ -27,6 +30,6 @@ class MovieAdapter(private val onMovieClicked: (Movie) -> Unit) :
     override fun getItemCount() = movies.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(movies[position], onMovieClicked)
+        holder.bind(movies[position], onMovieClicked, onMovieLongClicked)
     }
 }
