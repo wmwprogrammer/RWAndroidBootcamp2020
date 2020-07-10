@@ -11,6 +11,7 @@ import com.raywenderlich.myfavoritemovies.repository.UserRepository
 import com.raywenderlich.myfavoritemovies.validators.CredentialsValidator
 import kotlinx.android.synthetic.main.activity_login.*
 
+//this came from the solution
 fun startLoginActivity(from: Context) = from.startActivity(Intent(from, LoginActivity::class.java))
 
 class LoginActivity : AppCompatActivity() {
