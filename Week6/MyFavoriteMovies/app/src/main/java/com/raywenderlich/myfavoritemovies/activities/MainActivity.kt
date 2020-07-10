@@ -17,7 +17,6 @@ import com.raywenderlich.myfavoritemovies.repository.MovieRepository
 import com.raywenderlich.myfavoritemovies.repository.UserRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 //this came from the solution
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
             movieRepository.storeMoviesIfNotEmpty(movies)
         }
         fillMovieList()
@@ -42,14 +41,14 @@ class MainActivity : AppCompatActivity() {
     private fun fillMovieList() {
         moviesRecyclerView.layoutManager = LinearLayoutManager(this)
         moviesRecyclerView.adapter = movieAdapter
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
             val movies = movieRepository.getAllMovies()
             updateMovieListing(movies, this)
         }
     }
 
     private fun updateMovieListing(movies: List<Movie>, coroutineScope: CoroutineScope) {
-        coroutineScope.launch(Dispatchers.Main) {
+        coroutineScope.launch {
             movieAdapter.setMovies(movies)
         }
     }
@@ -74,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     //I know this function can be split up, but I am not sure how to do it.
     private fun movieItemLongClicked(movie: Movie): Boolean {
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
             movieRepository.deleteMovieById(movie.id)
             val movies = movieRepository.getAllMovies()
             updateMovieListing(movies, this)

@@ -9,7 +9,6 @@ import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.model.Movie
 import com.raywenderlich.myfavoritemovies.repository.MovieRepository
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 private const val MOVIE_KEY = "movie_id"
@@ -28,11 +27,9 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        lifecycleScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch {
             val movie = repository.getMovieById(movieId)
-            launch(Dispatchers.Main) {
-                displayMovieDetails(movie)
-            }
+            displayMovieDetails(movie)
         }
     }
 
