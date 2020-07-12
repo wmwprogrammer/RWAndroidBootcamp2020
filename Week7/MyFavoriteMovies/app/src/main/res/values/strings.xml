@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MyFavoriteMovies</string>
+    <string name="movie_poster_image">movie poster</string>
+    <string name="genreLabel">Genre:</string>
+    <string name="release_date_label">Release Date:</string>
+    <string name="movieSummaryLabel">Movie Summary:</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="loginButtonText">Login</string>
+    <string name="menu_logout_title">Log Out</string>
+</resources>
