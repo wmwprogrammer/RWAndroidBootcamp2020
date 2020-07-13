@@ -33,20 +33,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val movies = getMoviesFromApi()
-        lifecycleScope.launch {
-            movieRepository.storeMoviesIfNotEmpty(movies)
-        }
+        getMovieFromApi("Star Wars: Episode I")
+        getMovieFromApi("Star Wars: Episode II")
+        getMovieFromApi("Star Wars: Episode III")
+        getMovieFromApi("Star Wars: Episode IV")
+        getMovieFromApi("Star Wars: Episode V")
+        getMovieFromApi("Star Wars: Episode VI")
+        getMovieFromApi("Star Wars: Episode VII")
+        getMovieFromApi("Star Wars: Episode VIII")
+        getMovieFromApi("Star Wars: Episode IX")
         fillMovieList()
 
     }
 
-    private fun getMoviesFromApi(): List<Movie> {
-        val movies = mutableListOf<Movie>()
+    private fun getMovieFromApi(movieName: String) {
         lifecycleScope.launch {
-            val result = remoteApi.getMovie("Star Wars: Episode I")
+            val result = remoteApi.getMovie(movieName)
             if (result is Success) {
-                movies.add(
+                movieRepository.insertMovie(
                     Movie(
                         result.data.data.movies[0].idIMDB,
                         result.data.data.movies[0].releaseDate,
@@ -58,7 +62,6 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
-        return movies
     }
 
     private fun fillMovieList() {

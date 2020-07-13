@@ -7,6 +7,9 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovies(movies: List<Movie>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMovie(movie: Movie)
+
     @Delete
     suspend fun deleteMovies(vararg movie: Movie)
 
@@ -17,5 +20,5 @@ interface MovieDao {
     suspend fun getAllMovies(): List<Movie>
 
     @Query("SELECT * FROM movies_table WHERE id = :movieId")
-    suspend fun getMovieById(movieId: Int?): Movie
+    suspend fun getMovieById(movieId: String?): Movie
 }

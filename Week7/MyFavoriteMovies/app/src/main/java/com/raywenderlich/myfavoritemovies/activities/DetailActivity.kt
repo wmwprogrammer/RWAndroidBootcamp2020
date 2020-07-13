@@ -22,7 +22,7 @@ fun startDetailActivity(from: Context, movieId: String?) =
 
 class DetailActivity : AppCompatActivity() {
 
-    private val movieId by lazy { intent.getIntExtra(MOVIE_KEY, -1) }
+    private val movieId by lazy { intent.getStringExtra(MOVIE_KEY) }
     private val repository by lazy { MovieRepository() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
