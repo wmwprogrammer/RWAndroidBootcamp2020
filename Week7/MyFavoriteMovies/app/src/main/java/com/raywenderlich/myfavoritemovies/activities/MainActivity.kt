@@ -9,10 +9,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.raywenderlich.myfavoritemovies.App
 import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.adapters.MovieAdapter
-import com.raywenderlich.myfavoritemovies.data.DummyData.movies
 import com.raywenderlich.myfavoritemovies.model.Movie
+import com.raywenderlich.myfavoritemovies.model.Success
 import com.raywenderlich.myfavoritemovies.repository.MovieRepository
 import com.raywenderlich.myfavoritemovies.repository.UserRepository
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,15 +28,28 @@ class MainActivity : AppCompatActivity() {
     private val movieRepository by lazy { MovieRepository() }
     private val userRepository by lazy { UserRepository() }
     private val movieAdapter by lazy { MovieAdapter(::movieItemClicked, ::movieItemLongClicked) }
+    private val remoteApi = App.remoteApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val movies = getMoviesFromApi()
         lifecycleScope.launch {
             movieRepository.storeMoviesIfNotEmpty(movies)
         }
         fillMovieList()
+
+    }
+
+    private fun getMoviesFromApi(): List<Movie> {
+        val movies = mutableListOf<Movie>()
+        lifecycleScope.launch {
+            val result = remoteApi.getMovie("Star Wars: Episode I")
+            if (result is Success) {
+                val movie = Movie(result.data.movies.idIMDB, result.data.movies.releaseDate)
+            }
+        }
+        return movies
     }
 
     private fun fillMovieList() {

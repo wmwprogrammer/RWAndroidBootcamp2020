@@ -8,7 +8,7 @@ class Movie(
     @PrimaryKey(autoGenerate = true) var id: Int,
     var releaseDate: String,
     var title: String,
-    var summary: String,
-    var genre: String,
-    var poster: Int
+    var plot: String,
+    var genres: List<String>,
+    var urlPoster: String
 )

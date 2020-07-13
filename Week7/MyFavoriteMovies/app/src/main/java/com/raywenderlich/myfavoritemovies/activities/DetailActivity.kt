@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.model.Movie
 import com.raywenderlich.myfavoritemovies.repository.MovieRepository
@@ -34,9 +35,9 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun displayMovieDetails(movie: Movie) {
-        moviePosterImageView.setImageResource(movie.poster)
-        genreTextView.text = movie.genre
+        Glide.with(this).load(movie.urlPoster).into(moviePosterImageView)
+        genreTextView.text = movie.genres[0]
         releaseDateTextView.text = movie.releaseDate
-        movieSummaryTextView.text = movie.summary
+        movieSummaryTextView.text = movie.plot
     }
 }
