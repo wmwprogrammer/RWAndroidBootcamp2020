@@ -46,7 +46,16 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val result = remoteApi.getMovie("Star Wars: Episode I")
             if (result is Success) {
-                val movie = Movie(result.data.movies.idIMDB, result.data.movies.releaseDate)
+                movies.add(
+                    Movie(
+                        result.data.data.movies[0].idIMDB,
+                        result.data.data.movies[0].releaseDate,
+                        result.data.data.movies[0].title,
+                        result.data.data.movies[0].plot,
+                        result.data.data.movies[0].genres,
+                        result.data.data.movies[0].urlPoster
+                    )
+                )
             }
         }
         return movies

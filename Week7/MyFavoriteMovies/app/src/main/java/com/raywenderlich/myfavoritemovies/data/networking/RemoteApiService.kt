@@ -11,4 +11,11 @@ interface RemoteApiService {
         @Query("token") token: String,
         @Query("title") title: String
     ): MovieTopLevelResponse
+
+    @GET("/imdb/idIMDB")
+    suspend fun getMovies(
+        @Query("token") token: String,
+        @Query("title") title: String,
+        @Query("limit") limit: Int
+    )
 }

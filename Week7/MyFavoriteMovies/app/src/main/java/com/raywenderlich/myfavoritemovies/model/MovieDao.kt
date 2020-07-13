@@ -11,7 +11,7 @@ interface MovieDao {
     suspend fun deleteMovies(vararg movie: Movie)
 
     @Query("DELETE FROM movies_table WHERE id = :movieId")
-    suspend fun deleteMovieById(movieId: Int)
+    suspend fun deleteMovieById(movieId: String)
 
     @Query("SELECT * FROM movies_table ORDER BY title ASC")
     suspend fun getAllMovies(): List<Movie>

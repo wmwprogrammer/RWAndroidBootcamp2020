@@ -5,7 +5,7 @@ import com.raywenderlich.myfavoritemovies.model.Movie
 
 class MovieRepository {
 
-    suspend fun deleteMovieById(movieId: Int) = dao.deleteMovieById(movieId)
+    suspend fun deleteMovieById(movieId: String) = dao.deleteMovieById(movieId)
 
     suspend fun getAllMovies(): List<Movie> = dao.getAllMovies()
 
