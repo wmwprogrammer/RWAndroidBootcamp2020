@@ -2,6 +2,7 @@ package com.raywenderlich.myfavoritemovies.model
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.movie_list_view_holder.view.*
 
@@ -14,9 +15,8 @@ class MovieViewHolder(override val containerView: View) : RecyclerView.ViewHolde
         onMovieLongClicked: (Movie) -> Boolean
     ) = with(containerView) {
         movieTextView.text = movie.title
-        movieTextView.setCompoundDrawablesWithIntrinsicBounds(
-            movie.poster, 0, 0, 0
-        )
+        Glide.with(this).load(movie.urlPoster).into(imageView)
+
         rootView.setOnClickListener { onMovieClick(movie) }
         rootView.setOnLongClickListener { onMovieLongClicked(movie) }
     }

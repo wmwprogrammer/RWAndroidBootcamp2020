@@ -2,10 +2,12 @@ package com.raywenderlich.myfavoritemovies.activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.raywenderlich.myfavoritemovies.R
+import com.raywenderlich.myfavoritemovies.data.networking.NetworkStatusChecker
 import com.raywenderlich.myfavoritemovies.onClick
 import com.raywenderlich.myfavoritemovies.repository.UserRepository
 import com.raywenderlich.myfavoritemovies.validators.CredentialsValidator
@@ -18,13 +20,19 @@ class LoginActivity : AppCompatActivity() {
     private val credentialsValidator by lazy { CredentialsValidator() }
     private val userRepository by lazy { UserRepository() }
 
+    private val networkStatusChecker by lazy {
+        NetworkStatusChecker(getSystemService(ConnectivityManager::class.java))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        checkIfUserLoggedIn()
-        //used this method from the solution to avoid setting up a click listener every time
-        loginButton.onClick { checkCredentials() }
+        networkStatusChecker.performIfConnectedToInternet {
+            checkIfUserLoggedIn()
+            //used this method from the solution to avoid setting up a click listener every time
+            loginButton.onClick { checkCredentials() }
+        }
     }
 
     private fun checkIfUserLoggedIn() {

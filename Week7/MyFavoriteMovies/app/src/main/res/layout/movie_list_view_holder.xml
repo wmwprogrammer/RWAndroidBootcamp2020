@@ -8,13 +8,21 @@
     <!-- hint says to use 0dp instead of '@dimen/smallest_layout_width' for better performance
     on layout_width -->
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_weight="@dimen/layout_weight"
+        android:contentDescription="@string/contentDescription"
+        tools:srcCompat="@drawable/star_wars_episode_i" />
+
     <TextView
         android:id="@+id/movieTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin"
         android:layout_weight="@dimen/layout_weight"
-        android:drawableStart="@drawable/star_wars_episode_i"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         tools:text="Star Wars Episode I: The Phantom Menace" />

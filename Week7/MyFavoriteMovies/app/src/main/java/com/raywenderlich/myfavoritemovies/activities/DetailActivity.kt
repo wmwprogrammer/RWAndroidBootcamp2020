@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.model.Movie
 import com.raywenderlich.myfavoritemovies.repository.MovieRepository
@@ -14,14 +15,14 @@ import kotlinx.coroutines.launch
 private const val MOVIE_KEY = "movie_id"
 
 //this came from the solution
-fun startDetailActivity(from: Context, movieId: Int?) =
+fun startDetailActivity(from: Context, movieId: String?) =
     from.startActivity(Intent(from, DetailActivity::class.java).apply {
         putExtra(MOVIE_KEY, movieId)
     })
 
 class DetailActivity : AppCompatActivity() {
 
-    private val movieId by lazy { intent.getIntExtra(MOVIE_KEY, -1) }
+    private val movieId by lazy { intent.getStringExtra(MOVIE_KEY) }
     private val repository by lazy { MovieRepository() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,9 +35,9 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun displayMovieDetails(movie: Movie) {
-        moviePosterImageView.setImageResource(movie.poster)
-        genreTextView.text = movie.genre
+        Glide.with(this).load(movie.urlPoster).into(moviePosterImageView)
+        genreTextView.text = movie.genres[0]
         releaseDateTextView.text = movie.releaseDate
-        movieSummaryTextView.text = movie.summary
+        movieSummaryTextView.text = movie.plot
     }
 }

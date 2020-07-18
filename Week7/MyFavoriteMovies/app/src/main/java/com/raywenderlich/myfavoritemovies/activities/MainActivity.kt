@@ -9,10 +9,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.raywenderlich.myfavoritemovies.App
 import com.raywenderlich.myfavoritemovies.R
 import com.raywenderlich.myfavoritemovies.adapters.MovieAdapter
-import com.raywenderlich.myfavoritemovies.data.DummyData.movies
 import com.raywenderlich.myfavoritemovies.model.Movie
+import com.raywenderlich.myfavoritemovies.model.Success
 import com.raywenderlich.myfavoritemovies.repository.MovieRepository
 import com.raywenderlich.myfavoritemovies.repository.UserRepository
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,15 +28,40 @@ class MainActivity : AppCompatActivity() {
     private val movieRepository by lazy { MovieRepository() }
     private val userRepository by lazy { UserRepository() }
     private val movieAdapter by lazy { MovieAdapter(::movieItemClicked, ::movieItemLongClicked) }
+    private val remoteApi = App.remoteApi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        lifecycleScope.launch {
-            movieRepository.storeMoviesIfNotEmpty(movies)
-        }
+        getMovieFromApi("Star Wars: Episode I")
+        getMovieFromApi("Star Wars: Episode II")
+        getMovieFromApi("Star Wars: Episode III")
+        getMovieFromApi("Star Wars: Episode IV")
+        getMovieFromApi("Star Wars: Episode V")
+        getMovieFromApi("Star Wars: Episode VI")
+        getMovieFromApi("Star Wars: Episode VII")
+        getMovieFromApi("Star Wars: Episode VIII")
+        getMovieFromApi("Star Wars: Episode IX")
         fillMovieList()
+
+    }
+
+    private fun getMovieFromApi(movieName: String) {
+        lifecycleScope.launch {
+            val result = remoteApi.getMovie(movieName)
+            if (result is Success) {
+                movieRepository.insertMovie(
+                    Movie(
+                        result.data.data.movies[0].idIMDB,
+                        result.data.data.movies[0].releaseDate,
+                        result.data.data.movies[0].title,
+                        result.data.data.movies[0].plot,
+                        result.data.data.movies[0].genres,
+                        result.data.data.movies[0].urlPoster
+                    )
+                )
+            }
+        }
     }
 
     private fun fillMovieList() {
