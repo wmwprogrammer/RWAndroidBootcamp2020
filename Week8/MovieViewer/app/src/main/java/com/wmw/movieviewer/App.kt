@@ -2,16 +2,16 @@ package com.wmw.movieviewer
 
 import android.app.Application
 import androidx.room.Room
-import com.wmw.movieviewer.data.networking.RemoteApi
-import com.wmw.movieviewer.data.networking.buildApiService
 import com.wmw.movieviewer.model.DATABASE_NAME
 import com.wmw.movieviewer.model.MovieDatabase
+import com.wmw.movieviewer.networking.RemoteApi
+import com.wmw.movieviewer.networking.buildApiService
 
 /**
  * Using an App class, so that I can init the movieDb one time.
  */
 
-private const val TOKEN = "08e2d505-51b6-4bae-8fc3-a12a0cbe8951"
+private const val TOKEN = BuildConfig.IMDB_TOKEN
 
 class App : Application() {
     companion object {
@@ -24,7 +24,11 @@ class App : Application() {
 
         private val apiService by lazy { buildApiService() }
 
-        val remoteApi by lazy { RemoteApi(apiService) }
+        val remoteApi by lazy {
+            RemoteApi(
+                apiService
+            )
+        }
 
     }
 

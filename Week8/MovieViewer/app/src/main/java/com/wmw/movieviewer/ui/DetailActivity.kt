@@ -1,4 +1,4 @@
-package com.wmw.movieviewer.activities
+package com.wmw.movieviewer.ui
 
 import android.content.Context
 import android.content.Intent

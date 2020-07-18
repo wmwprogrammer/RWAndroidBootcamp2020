@@ -1,4 +1,4 @@
-package com.wmw.movieviewer.data.networking
+package com.wmw.movieviewer.networking
 
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.model.Failure
@@ -13,7 +13,7 @@ class RemoteApi(private val apiService: RemoteApiService) {
 
     suspend fun getMovie(movieName: String): Result<MovieTopLevelResponse> = try {
         val response = apiService.getMovie(App.getToken(), movieName)
-
+//        val response = apiService.getMovie(movieName)
         Success(response)
     } catch (error: Throwable) {
         Failure(error)

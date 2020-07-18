@@ -1,7 +1,8 @@
-package com.wmw.movieviewer.data.networking
+package com.wmw.movieviewer.networking
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.wmw.movieviewer.App
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -17,9 +18,10 @@ fun buildClient(): OkHttpClient =
         .addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         })
-//        .addInterceptor(buildAuthorizationInterceptor())
+        .addInterceptor(buildAuthorizationInterceptor())
         .build()
 
+@UnstableDefault
 fun buildRetrofit(): Retrofit {
     val contentType = "application/json".toMediaType()
 

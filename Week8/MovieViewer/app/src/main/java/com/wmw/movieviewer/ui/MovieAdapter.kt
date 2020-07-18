@@ -1,11 +1,10 @@
-package com.wmw.movieviewer.adapters
+package com.wmw.movieviewer.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
-import com.wmw.movieviewer.model.MovieViewHolder
 
 class MovieAdapter(
     private val onMovieClicked: (Movie) -> Unit,

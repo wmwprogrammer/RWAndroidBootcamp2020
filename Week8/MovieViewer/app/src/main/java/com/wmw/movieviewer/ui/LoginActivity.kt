@@ -1,4 +1,4 @@
-package com.wmw.movieviewer.activities
+package com.wmw.movieviewer.ui
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.wmw.movieviewer.R
-import com.wmw.movieviewer.data.networking.NetworkStatusChecker
+import com.wmw.movieviewer.networking.NetworkStatusChecker
 import com.wmw.movieviewer.onClick
 import com.wmw.movieviewer.repository.UserRepository
 import com.wmw.movieviewer.validators.CredentialsValidator
@@ -21,7 +21,11 @@ class LoginActivity : AppCompatActivity() {
     private val userRepository by lazy { UserRepository() }
 
     private val networkStatusChecker by lazy {
-        NetworkStatusChecker(getSystemService(ConnectivityManager::class.java))
+        NetworkStatusChecker(
+            getSystemService(
+                ConnectivityManager::class.java
+            )
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

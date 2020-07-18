@@ -1,8 +1,9 @@
-package com.wmw.movieviewer.model
+package com.wmw.movieviewer.ui
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.wmw.movieviewer.model.Movie
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.movie_list_view_holder.view.*
 

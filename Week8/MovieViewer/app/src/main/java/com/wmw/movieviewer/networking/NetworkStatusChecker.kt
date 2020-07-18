@@ -1,4 +1,4 @@
-package com.wmw.movieviewer.data.networking
+package com.wmw.movieviewer.networking
 
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities

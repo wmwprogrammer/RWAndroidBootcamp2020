@@ -1,4 +1,4 @@
-package com.wmw.movieviewer.data.networking
+package com.wmw.movieviewer.networking
 
 import com.wmw.movieviewer.model.response.MovieTopLevelResponse
 import retrofit2.http.GET

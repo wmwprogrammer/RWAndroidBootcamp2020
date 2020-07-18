@@ -1,4 +1,4 @@
-package com.wmw.movieviewer.activities
+package com.wmw.movieviewer.ui
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
-import com.wmw.movieviewer.adapters.MovieAdapter
 import com.wmw.movieviewer.model.Movie
 import com.wmw.movieviewer.model.Success
 import com.wmw.movieviewer.repository.MovieRepository
@@ -27,7 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     private val movieRepository by lazy { MovieRepository() }
     private val userRepository by lazy { UserRepository() }
-    private val movieAdapter by lazy { MovieAdapter(::movieItemClicked, ::movieItemLongClicked) }
+    private val movieAdapter by lazy {
+        MovieAdapter(
+            ::movieItemClicked,
+            ::movieItemLongClicked
+        )
+    }
     private val remoteApi = App.remoteApi
 
     override fun onCreate(savedInstanceState: Bundle?) {

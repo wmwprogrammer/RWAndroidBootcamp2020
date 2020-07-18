@@ -6,11 +6,11 @@ import com.wmw.movieviewer.App
 class SharedPrefsManager {
     private val context = App.getAppContext()
     private val prefs =
-        context.getSharedPreferences("FavoriteMoviePreferences", Context.MODE_PRIVATE)
+        context.getSharedPreferences("MovieViewerPreferences", Context.MODE_PRIVATE)
 
     fun setUserLoggedIn(isLoggedIn: Boolean) {
-        prefs.edit().putBoolean("FavoriteMoviePreferences", isLoggedIn).apply()
+        prefs.edit().putBoolean("MovieViewerPreferences", isLoggedIn).apply()
     }
 
-    fun isUserLoggedIn() = prefs.getBoolean("FavoriteMoviePreferences", false)
+    fun isUserLoggedIn() = prefs.getBoolean("MovieViewerPreferences", false)
 }
