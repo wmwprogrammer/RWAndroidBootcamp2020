@@ -13,7 +13,23 @@ class RemoteApi(private val apiService: RemoteApiService) {
 
     suspend fun getMovie(movieName: String): Result<MovieTopLevelResponse> = try {
         val response = apiService.getMovie(App.getToken(), movieName)
-//        val response = apiService.getMovie(movieName)
+
+        Success(response)
+    } catch (error: Throwable) {
+        Failure(error)
+    }
+
+    /**
+     * Gets the top movies
+     * @param start First film to retrieve
+     * @param end Last film to retrieve. If not reported, the film will recover the start parameter
+     */
+    suspend fun getTopMovies(
+        start: String = "1",
+        end: String = "10"
+    ): Result<MovieTopLevelResponse> = try {
+        val response = apiService.getTopMovies(App.getToken(), start, end, "0", "json")
+
         Success(response)
     } catch (error: Throwable) {
         Failure(error)

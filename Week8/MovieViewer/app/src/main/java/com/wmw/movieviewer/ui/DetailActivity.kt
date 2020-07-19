@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
 import com.wmw.movieviewer.repository.MovieRepository
@@ -23,7 +24,7 @@ fun startDetailActivity(from: Context, movieId: String?) =
 class DetailActivity : AppCompatActivity() {
 
     private val movieId by lazy { intent.getStringExtra(MOVIE_KEY) }
-    private val repository by lazy { MovieRepository() }
+    private val repository by lazy { MovieRepository(App.movieDb.movieDao(), App.remoteApi) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

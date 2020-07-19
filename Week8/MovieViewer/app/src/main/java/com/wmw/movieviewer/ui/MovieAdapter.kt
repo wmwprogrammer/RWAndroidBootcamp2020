@@ -2,6 +2,7 @@ package com.wmw.movieviewer.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
@@ -9,14 +10,12 @@ import com.wmw.movieviewer.model.Movie
 class MovieAdapter(
     private val onMovieClicked: (Movie) -> Unit,
     private val onMovieLongClicked: (Movie) -> Boolean
-) :
-    RecyclerView.Adapter<MovieViewHolder>() {
+) : RecyclerView.Adapter<MovieViewHolder>() {
 
-    private val movies = mutableListOf<Movie>()
+    private var movies = listOf<Movie>()
 
-    fun setMovies(movies: List<Movie>) {
-        this.movies.clear()
-        this.movies.addAll(movies)
+    fun setMovies(movies: LiveData<List<Movie>>) {
+        this.movies = movies.value ?: listOf()
         notifyDataSetChanged()
     }
 

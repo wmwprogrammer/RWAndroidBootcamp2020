@@ -50,18 +50,3 @@ fun buildAuthorizationInterceptor() = object : Interceptor {
 
 
 }
-//fun buildClient(): OkHttpClient = OkHttpClient.Builder().build()
-//
-//@kotlinx.serialization.UnstableDefault
-//fun buildRetrofit(): Retrofit {
-//    val contentType = "application/json".toMediaType()
-//
-//    return Retrofit.Builder()
-//        .client(buildClient())
-//        .baseUrl(BASE_URL)
-//        .addConverterFactory(Json(JsonConfiguration(false, true)).asConverterFactory(contentType))
-//        .build()
-//}
-//
-//@UnstableDefault
-//fun buildApiService(): RemoteApiService = buildRetrofit().create(RemoteApiService::class.java)
