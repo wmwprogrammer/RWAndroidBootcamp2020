@@ -10,13 +10,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
 import com.wmw.movieviewer.repository.MovieRepository
 import com.wmw.movieviewer.repository.UserRepository
+import com.wmw.movieviewer.worker.SynchronizeMovieDatabaseWorker
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 fun startMainActivity(from: Context) = from.startActivity(Intent(from, MainActivity::class.java))
 
@@ -37,6 +43,20 @@ class MainActivity : AppCompatActivity() {
         movieRepository.getAllMovies().observe(this, Observer {
             movieAdapter.setMovies(it)
         })
+
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.NOT_ROAMING)
+            .setRequiresBatteryNotLow(true)
+            .setRequiresStorageNotLow(true)
+            .build()
+
+
+        val work = PeriodicWorkRequestBuilder<SynchronizeMovieDatabaseWorker>(1, TimeUnit.HOURS)
+            .setConstraints(constraints)
+            .build()
+
+        val workManager = WorkManager.getInstance(this)
+        workManager.enqueue(work)
     }
 
 
