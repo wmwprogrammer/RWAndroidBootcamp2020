@@ -23,19 +23,9 @@ class MovieRepository(private val movieDao: MovieDao, private val movieApi: Remo
         }
     }
 
-//    suspend fun storeMoviesIfNotEmpty(movies: List<Movie>) {
-//        val savedMovies = getAllMovies().value
-//
-//        if (savedMovies != null && savedMovies.isEmpty()) saveMovies(movies)
-//    }
-
     suspend fun deleteMovieById(movieId: String) = dao.deleteMovieById(movieId)
 
     suspend fun getMovieById(movieId: String?) = dao.getMovieById(movieId)
 
-//    suspend fun insertMovie(movie: Movie) = dao.insert(movie)
-
     private val dao = App.movieDb.movieDao()
-
-//    private suspend fun saveMovies(movies: List<Movie>) = dao.insert(movies)
 }

@@ -6,7 +6,3 @@ import android.view.View
 fun View.onClick(onClickAction: () -> Unit) {
     setOnClickListener { onClickAction() }
 }
-
-//fun View.longPress(onLongPressAction: () -> Boolean) {
-//    setOnLongClickListener { onLongPressAction() }
-//}

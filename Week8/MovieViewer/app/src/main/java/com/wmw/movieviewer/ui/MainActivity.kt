@@ -7,15 +7,17 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
 import com.wmw.movieviewer.repository.MovieRepository
 import com.wmw.movieviewer.repository.UserRepository
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 
-//this came from the solution
 fun startMainActivity(from: Context) = from.startActivity(Intent(from, MainActivity::class.java))
 
 class MainActivity : AppCompatActivity() {
@@ -26,26 +28,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        moviesRecyclerView.adapter = movieAdapter
+        moviesRecyclerView.layoutManager = LinearLayoutManager(this)
+
         lifecycleScope.launch {
             movieRepository.refreshMovies()
         }
-//        fillMovieList()
+        movieRepository.getAllMovies().observe(this, Observer {
+            movieAdapter.setMovies(it)
+        })
     }
 
-//    private fun fillMovieList() {
-//        moviesRecyclerView.layoutManager = LinearLayoutManager(this)
-//        moviesRecyclerView.adapter = movieAdapter
-//        lifecycleScope.launch {
-//            val movies = movieRepository.getAllMovies()
-//            updateMovieListing(movies, this)
-//        }
-//    }
-
-//    private fun updateMovieListing(movies: LiveData<List<Movie>>, coroutineScope: CoroutineScope) {
-//        coroutineScope.launch {
-//            movieAdapter.setMovies(movies)
-//        }
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -67,11 +60,7 @@ class MainActivity : AppCompatActivity() {
 
     //I know this function can be split up, but I am not sure how to do it.
     private fun movieItemLongClicked(movie: Movie): Boolean {
-        lifecycleScope.launch {
-            movieRepository.deleteMovieById(movie.id)
-            val movies = movieRepository.getAllMovies()
-//            updateMovieListing(movies, this)
-        }
+        movieAdapter.deleteMovie(movie)
         return true
     }
 

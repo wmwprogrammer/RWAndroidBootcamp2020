@@ -15,7 +15,6 @@ import kotlinx.coroutines.launch
 
 private const val MOVIE_KEY = "movie_id"
 
-//this came from the solution
 fun startDetailActivity(from: Context, movieId: String?) =
     from.startActivity(Intent(from, DetailActivity::class.java).apply {
         putExtra(MOVIE_KEY, movieId)

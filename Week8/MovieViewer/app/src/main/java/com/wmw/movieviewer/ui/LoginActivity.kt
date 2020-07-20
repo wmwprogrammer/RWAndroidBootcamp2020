@@ -13,7 +13,6 @@ import com.wmw.movieviewer.repository.UserRepository
 import com.wmw.movieviewer.validators.CredentialsValidator
 import kotlinx.android.synthetic.main.activity_login.*
 
-//this came from the solution
 fun startLoginActivity(from: Context) = from.startActivity(Intent(from, LoginActivity::class.java))
 
 class LoginActivity : AppCompatActivity() {
