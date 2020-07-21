@@ -19,11 +19,6 @@ class MovieAdapter(
         notifyDataSetChanged()
     }
 
-    fun deleteMovie(movie: Movie) {
-        movies.remove(movie)
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.movie_list_view_holder, parent, false)

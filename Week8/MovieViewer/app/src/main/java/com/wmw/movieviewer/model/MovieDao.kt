@@ -12,12 +12,12 @@ interface MovieDao {
     suspend fun insert(movie: Movie)
 
     @Delete
-    suspend fun deleteMovies(vararg movie: Movie)
+    suspend fun deleteMovie(vararg movie: Movie)
 
     @Query("DELETE FROM movies_table WHERE id = :movieId")
     suspend fun deleteMovieById(movieId: String)
 
-    @Query("SELECT * FROM movies_table ORDER BY title ASC")
+    @Query("SELECT * FROM movies_table ORDER BY ranking ASC")
     fun getAllMoviesSortedByTitle(): LiveData<List<Movie>>
 
     @Query("SELECT * FROM movies_table WHERE id = :movieId")

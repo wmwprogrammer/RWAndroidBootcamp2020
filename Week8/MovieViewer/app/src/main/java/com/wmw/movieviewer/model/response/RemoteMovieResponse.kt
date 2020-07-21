@@ -18,5 +18,6 @@ data class MovieResponse(
     var title: String,
     var plot: String,
     var genres: List<String>,
-    var urlPoster: String
+    var urlPoster: String,
+    var ranking: Int
 )

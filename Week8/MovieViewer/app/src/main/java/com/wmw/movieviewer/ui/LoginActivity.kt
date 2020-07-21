@@ -46,8 +46,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun checkCredentials() {
         credentialsValidator.setCredentials(
-            usernameEditText.text.toString(),
-            passwordEditText.text.toString()
+            usernameInput.text.toString(),
+            passwordInput.text.toString()
         )
 
         toggleUsernameState()

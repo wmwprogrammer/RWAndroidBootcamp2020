@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.wmw.movieviewer.App
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -28,10 +29,11 @@ fun buildRetrofit(): Retrofit {
     return Retrofit.Builder()
         .client(buildClient())
         .baseUrl(BASE_URL)
-        .addConverterFactory(Json.nonstrict.asConverterFactory(contentType))
+        .addConverterFactory(Json(JsonConfiguration(false, true)).asConverterFactory(contentType))
         .build()
 }
 
+@UnstableDefault
 fun buildApiService(): RemoteApiService =
     buildRetrofit().create(RemoteApiService::class.java)
 

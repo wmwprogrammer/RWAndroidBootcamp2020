@@ -7,28 +7,28 @@
     tools:context=".ui.LoginActivity">
 
     <EditText
-        android:id="@+id/usernameEditText"
+        android:id="@+id/usernameInput"
         android:layout_width="@dimen/login_field_layout_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/login_layout_top"
         android:autofillHints=""
-        android:hint="@string/username"
+        android:hint="@string/usernameHint"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/passwordInput"
         android:layout_width="@dimen/login_field_layout_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_padding"
         android:autofillHints=""
-        android:hint="@string/password"
+        android:hint="@string/passwordHint"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
 
     <Button
         android:id="@+id/loginButton"
@@ -38,5 +38,5 @@
         android:text="@string/loginButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
 </androidx.constraintlayout.widget.ConstraintLayout>

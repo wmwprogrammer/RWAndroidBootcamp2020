@@ -16,14 +16,22 @@ class MovieRepository(private val movieDao: MovieDao, private val movieApi: Remo
 
         if (result is Success) {
             movieDao.insert(result.data.data.movies.toList().map {
-                Movie(it.idIMDB, it.releaseDate, it.title, it.plot, it.genres, it.urlPoster)
+                Movie(
+                    it.idIMDB,
+                    it.releaseDate,
+                    it.title,
+                    it.plot,
+                    it.genres,
+                    it.urlPoster,
+                    it.ranking
+                )
             })
         } else {
             print("Error: $result")
         }
     }
 
-    suspend fun deleteMovieById(movieId: String) = dao.deleteMovieById(movieId)
+    suspend fun deleteMovie(movie: Movie) = dao.deleteMovie(movie)
 
     suspend fun getMovieById(movieId: String?) = dao.getMovieById(movieId)
 

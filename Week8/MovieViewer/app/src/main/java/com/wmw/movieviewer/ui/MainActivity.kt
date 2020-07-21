@@ -44,6 +44,10 @@ class MainActivity : AppCompatActivity() {
             movieAdapter.setMovies(it)
         })
 
+        startPeriodicJob()
+    }
+
+    private fun startPeriodicJob() {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.NOT_ROAMING)
             .setRequiresBatteryNotLow(true)
@@ -78,9 +82,10 @@ class MainActivity : AppCompatActivity() {
         startDetailActivity(this, movie.id)
     }
 
-    //I know this function can be split up, but I am not sure how to do it.
     private fun movieItemLongClicked(movie: Movie): Boolean {
-        movieAdapter.deleteMovie(movie)
+        lifecycleScope.launch {
+            movieRepository.deleteMovie(movie)
+        }
         return true
     }
 
