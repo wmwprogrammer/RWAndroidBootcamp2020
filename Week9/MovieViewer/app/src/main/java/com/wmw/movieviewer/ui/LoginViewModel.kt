@@ -17,5 +17,4 @@ class LoginViewModel(
         userRepository.setUserLoggedIn(value)
     }
 
-
 }
