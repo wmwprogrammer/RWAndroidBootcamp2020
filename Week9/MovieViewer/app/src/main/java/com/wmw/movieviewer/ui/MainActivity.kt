@@ -21,18 +21,19 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.UnstableDefault
 import java.util.concurrent.TimeUnit
 
+@UnstableDefault
 fun startMainActivity(from: Context) = from.startActivity(Intent(from, MainActivity::class.java))
 
+@UnstableDefault
 class MainActivity : AppCompatActivity() {
-    @UnstableDefault
+
+
     private val viewModel by lazy {
         ViewModelProvider(this, App.viewModelFactory).get(MovieViewModel::class.java)
     }
 
-    @UnstableDefault
     private val movieAdapter by lazy { MovieAdapter(::movieItemClicked, ::movieItemLongClicked) }
 
-    @UnstableDefault
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -63,7 +64,6 @@ class MainActivity : AppCompatActivity() {
             .setRequiresStorageNotLow(true)
             .build()
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun movieItemClicked(movie: Movie) {
-        startDetailActivity(this, movie.id)
+        startDetailActivity(this, movie)
     }
 
     @UnstableDefault

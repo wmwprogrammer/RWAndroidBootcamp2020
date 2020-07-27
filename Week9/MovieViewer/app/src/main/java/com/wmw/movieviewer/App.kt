@@ -9,13 +9,14 @@ import com.wmw.movieviewer.networking.RemoteApi
 import com.wmw.movieviewer.networking.buildApiService
 import com.wmw.movieviewer.repository.MovieRepository
 import com.wmw.movieviewer.repository.UserRepository
+import com.wmw.movieviewer.ui.MovieDetailViewModelFactory
 import com.wmw.movieviewer.ui.MovieViewModelFactory
 import kotlinx.serialization.UnstableDefault
 
 /**
  * Using an App class, so that I can init the movieDb one time.
  */
-
+@UnstableDefault
 class App : Application() {
     companion object {
         private lateinit var instance: App
@@ -25,19 +26,17 @@ class App : Application() {
 
         private val movieDao by lazy { movieDb.movieDao() }
 
-        @UnstableDefault
         private val apiService by lazy { buildApiService() }
 
-        @UnstableDefault
         val remoteApi by lazy { RemoteApi(apiService) }
 
         val userRepository by lazy { UserRepository(SharedPrefsManager()) }
 
-        @UnstableDefault
         val repository: MovieRepository by lazy { MovieRepository(movieDao, remoteApi) }
 
-        @UnstableDefault
         val viewModelFactory by lazy { MovieViewModelFactory(repository, userRepository) }
+
+        val detailViewModelFactory by lazy { MovieDetailViewModelFactory() }
 
         fun getAppContext() = instance
 

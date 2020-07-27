@@ -7,7 +7,7 @@ import com.wmw.movieviewer.model.Success
 import com.wmw.movieviewer.model.response.MovieResponse
 import com.wmw.movieviewer.networking.RemoteApi
 
-class MovieRepository(private val movieDao: MovieDao, private val movieApi: RemoteApi) {
+open class MovieRepository(private val movieDao: MovieDao, private val movieApi: RemoteApi) {
     fun getAllMovies(): LiveData<List<Movie>> = movieDao.getAllMoviesSortedByTitle()
 
     suspend fun loadMoviesForPage(startingPage: Int = 1, endingPage: Int = 10) {
