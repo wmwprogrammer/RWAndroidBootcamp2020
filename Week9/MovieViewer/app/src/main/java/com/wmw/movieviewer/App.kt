@@ -8,7 +8,7 @@ import com.wmw.movieviewer.model.MovieDatabase
 import com.wmw.movieviewer.networking.RemoteApi
 import com.wmw.movieviewer.networking.buildApiService
 import com.wmw.movieviewer.repository.MovieRepositoryImpl
-import com.wmw.movieviewer.repository.UserRepository
+import com.wmw.movieviewer.repository.UserRepositoryImpl
 import com.wmw.movieviewer.ui.LoginViewModelFactory
 import com.wmw.movieviewer.ui.MovieDetailViewModelFactory
 import com.wmw.movieviewer.ui.MovieViewModelFactory
@@ -34,7 +34,7 @@ class App : Application() {
 
         val remoteMovieApi by lazy { RemoteApi(apiService) }
 
-        val userRepository by lazy { UserRepository(SharedPrefsManager()) }
+        val userRepository by lazy { UserRepositoryImpl(SharedPrefsManager()) }
 
         val movieRepository: MovieRepositoryImpl by lazy { MovieRepositoryImpl(movieDao, remoteMovieApi) }
 

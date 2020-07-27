@@ -5,12 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wmw.movieviewer.model.Movie
 import com.wmw.movieviewer.repository.MovieRepositoryImpl
-import com.wmw.movieviewer.repository.UserRepository
+import com.wmw.movieviewer.repository.UserRepositoryImpl
 import kotlinx.coroutines.launch
 
 class MovieViewModel(
         private val repository: MovieRepositoryImpl,
-        private val userRepository: UserRepository
+        private val userRepository: UserRepositoryImpl
 ) : ViewModel() {
 
     private var currentPage = 1
