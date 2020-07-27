@@ -14,7 +14,7 @@ class SynchronizeMovieDatabaseWorker(context: Context, params: WorkerParameters)
     CoroutineWorker(context, params) {
 
     @UnstableDefault
-    private val movieRepository by lazy { App.repository }
+    private val movieRepository by lazy { App.movieRepository }
 
     @UnstableDefault
     override suspend fun doWork(): Result {

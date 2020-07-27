@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private val viewModel by lazy {
-        ViewModelProvider(this, App.viewModelFactory).get(MovieViewModel::class.java)
+        ViewModelProvider(this, App.movieViewModelFactory).get(MovieViewModel::class.java)
     }
 
     private val movieAdapter by lazy { MovieAdapter(::movieItemClicked, ::movieItemLongClicked) }

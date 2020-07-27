@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.networking.NetworkStatusChecker
@@ -16,8 +17,10 @@ import kotlinx.android.synthetic.main.activity_login.*
 fun startLoginActivity(from: Context) = from.startActivity(Intent(from, LoginActivity::class.java))
 
 class LoginActivity : AppCompatActivity() {
-    private val credentialsValidator by lazy { CredentialsValidator() }
-    private val userRepository by lazy { App.userRepository }
+    private val viewModel by lazy {
+        ViewModelProvider(this, App.loginViewModelFactory).get(LoginViewModel::class.java)
+    }
+    private val credentialsValidator by lazy { App.credentialsValidator }
 
     private val networkStatusChecker by lazy {
         NetworkStatusChecker(
@@ -32,17 +35,13 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         networkStatusChecker.performIfConnectedToInternet {
-            checkIfUserLoggedIn()
+           if (viewModel.checkIfUserLoggedIn()) startMainActivity()
+
             //used this method from the solution to avoid setting up a click listener every time
             loginButton.onClick { checkCredentials() }
         }
     }
 
-    private fun checkIfUserLoggedIn() {
-        if (userRepository.isUserLoggedIn()) {
-            startMainActivity()
-        }
-    }
 
     private fun checkCredentials() {
         credentialsValidator.setCredentials(
@@ -54,7 +53,7 @@ class LoginActivity : AppCompatActivity() {
         togglePasswordState()
 
         if (credentialsValidator.areCredentialsValid()) {
-            userRepository.setUserLoggedIn(true)
+            viewModel.setUserLoggedIn(true)
             startMainActivity()
         }
     }

@@ -9,8 +9,10 @@ import com.wmw.movieviewer.networking.RemoteApi
 import com.wmw.movieviewer.networking.buildApiService
 import com.wmw.movieviewer.repository.MovieRepositoryImpl
 import com.wmw.movieviewer.repository.UserRepository
+import com.wmw.movieviewer.ui.LoginViewModelFactory
 import com.wmw.movieviewer.ui.MovieDetailViewModelFactory
 import com.wmw.movieviewer.ui.MovieViewModelFactory
+import com.wmw.movieviewer.validators.CredentialsValidator
 import kotlinx.serialization.UnstableDefault
 
 /**
@@ -28,15 +30,19 @@ class App : Application() {
 
         private val apiService by lazy { buildApiService() }
 
-        val remoteApi by lazy { RemoteApi(apiService) }
+        val credentialsValidator by lazy { CredentialsValidator() }
+
+        val remoteMovieApi by lazy { RemoteApi(apiService) }
 
         val userRepository by lazy { UserRepository(SharedPrefsManager()) }
 
-        val repository: MovieRepositoryImpl by lazy { MovieRepositoryImpl(movieDao, remoteApi) }
+        val movieRepository: MovieRepositoryImpl by lazy { MovieRepositoryImpl(movieDao, remoteMovieApi) }
 
-        val viewModelFactory by lazy { MovieViewModelFactory(repository, userRepository) }
+        val movieViewModelFactory by lazy { MovieViewModelFactory(movieRepository, userRepository) }
 
         val detailViewModelFactory by lazy { MovieDetailViewModelFactory() }
+
+        val loginViewModelFactory by lazy { LoginViewModelFactory(credentialsValidator, userRepository)}
 
         fun getAppContext() = instance
 
