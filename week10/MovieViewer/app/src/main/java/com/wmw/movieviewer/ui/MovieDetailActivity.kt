@@ -24,7 +24,7 @@ fun startDetailActivity(from: Context, movieId: String) =
 class DetailActivity : AppCompatActivity() {
 
     private val movieId by lazy { intent.getStringExtra(MOVIE_KEY) }
-    private val viewModel by viewModels<MovieDetailViewModel> { App.detailViewModelFactory }
+    private val viewModel by viewModels<MovieDetailViewModel> { App.movieDetailViewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

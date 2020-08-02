@@ -14,14 +14,14 @@ class SynchronizeMovieDatabaseWorker(context: Context, params: WorkerParameters)
     CoroutineWorker(context, params) {
 
     @UnstableDefault
-    private val movieRepository by lazy { App.movieRepository }
+    private val moviesRepository by lazy { App.moviesRepository }
 
     @UnstableDefault
     override suspend fun doWork(): Result {
         GlobalScope.launch(Dispatchers.Main) {
             Toast.makeText(App.getAppContext(), "Running Background Sync", Toast.LENGTH_LONG).show()
         }
-        movieRepository.loadMoviesForPage()
+        moviesRepository.loadMoviesForPage()
         return Result.success()
     }
 }

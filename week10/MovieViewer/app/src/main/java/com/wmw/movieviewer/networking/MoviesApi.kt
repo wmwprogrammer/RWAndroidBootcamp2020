@@ -9,7 +9,7 @@ import com.wmw.movieviewer.model.response.MovieTopLevelResponse
 
 const val BASE_URL = "https://www.myapifilms.com/"
 
-class RemoteApi(private val apiService: RemoteApiService) {
+class RemoteApi(private val moviesApi: MoviesApiInterface) {
 
     /**
      * Gets the top movies
@@ -20,7 +20,7 @@ class RemoteApi(private val apiService: RemoteApiService) {
         start: Int = 1,
         end: Int = 10
     ): Result<MovieTopLevelResponse> = try {
-        val response = apiService.getTopMovies(App.getToken(), start, end, "1", "json")
+        val response = moviesApi.getTopMovies(App.getToken(), start, end, "1", "json")
 
         Success(response)
     } catch (error: Throwable) {

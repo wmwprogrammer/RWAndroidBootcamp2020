@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.wmw.movieviewer.model.Movie
-import com.wmw.movieviewer.repository.MovieRepository
+import com.wmw.movieviewer.repository.MoviesRepository
 import kotlinx.coroutines.launch
 
-class MovieDetailViewModel(private val repository: MovieRepository) : ViewModel() {
+class MovieDetailViewModel(private val repository: MoviesRepository) : ViewModel() {
     private val selectedLiveMovie = MutableLiveData<Movie>()
 
     fun getMovieById(movieId: String) {

@@ -4,7 +4,7 @@ import com.wmw.movieviewer.model.response.MovieTopLevelResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface RemoteApiService {
+interface MoviesApiInterface {
 
     /**
      * This will retreive the top number of movies from the remote api

@@ -6,25 +6,25 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.*
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.model.Movie
-import com.wmw.movieviewer.repository.MovieRepository
+import com.wmw.movieviewer.repository.MoviesRepository
 import com.wmw.movieviewer.repository.UserRepository
 import com.wmw.movieviewer.worker.SynchronizeMovieDatabaseWorker
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class MovieViewModel(
-    private val repository: MovieRepository,
+    private val moviesRepository: MoviesRepository,
     private val userRepository: UserRepository
 ) : ViewModel() {
 
     private var currentPage = 1
 
-    fun getMovies(): LiveData<List<Movie>> = repository.getAllMovies()
+    fun getMovies(): LiveData<List<Movie>> = moviesRepository.getAllMovies()
 
     fun fetchMovies() {
         viewModelScope.launch {
             val endingPage = currentPage + 9
-            repository.loadMoviesForPage(currentPage, endingPage)
+            moviesRepository.loadMoviesForPage(currentPage, endingPage)
             currentPage++
         }
     }
@@ -43,7 +43,7 @@ class MovieViewModel(
 
     fun deleteMovie(movie: Movie) {
         viewModelScope.launch {
-            repository.deleteMovie(movie)
+            moviesRepository.deleteMovie(movie)
         }
     }
 

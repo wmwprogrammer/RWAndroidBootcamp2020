@@ -7,7 +7,7 @@ import com.wmw.movieviewer.model.Success
 import com.wmw.movieviewer.model.response.MovieResponse
 import com.wmw.movieviewer.networking.RemoteApi
 
-open class MovieRepositoryImpl(private val movieDao: MovieDao, private val movieApi: RemoteApi) : MovieRepository {
+open class MoviesRepositoryImpl(private val movieDao: MovieDao, private val movieApi: RemoteApi) : MoviesRepository {
     override fun getAllMovies(): LiveData<List<Movie>> = movieDao.getAllMoviesSortedByTitle()
 
     override suspend fun getMovieById(movieId: String?): Movie = movieDao.getMovieById(movieId)

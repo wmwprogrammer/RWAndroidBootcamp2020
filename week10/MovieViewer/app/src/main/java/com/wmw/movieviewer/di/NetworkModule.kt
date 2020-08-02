@@ -2,7 +2,7 @@ package com.wmw.movieviewer.di
 
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.BuildConfig
-import com.wmw.movieviewer.networking.RemoteApiService
+import com.wmw.movieviewer.networking.MoviesApiInterface
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -49,7 +49,7 @@ val networkModule = module {
             .build()
     }
     single {
-        get<Retrofit>().create(RemoteApiService::class.java)
+        get<Retrofit>().create(MoviesApiInterface::class.java)
     }
 }
 

@@ -26,8 +26,8 @@ fun buildRetrofit(): Retrofit {
         .build()
 }
 
-fun buildApiService(): RemoteApiService =
-    buildRetrofit().create(RemoteApiService::class.java)
+fun buildApiService(): MoviesApiInterface =
+    buildRetrofit().create(MoviesApiInterface::class.java)
 
 fun buildAuthorizationInterceptor() = object : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {

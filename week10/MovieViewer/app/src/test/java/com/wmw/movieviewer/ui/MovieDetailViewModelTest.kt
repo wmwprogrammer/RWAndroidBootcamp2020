@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.github.testcoroutinesrule.TestCoroutineRule
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
-import com.wmw.movieviewer.repository.MovieRepository
+import com.wmw.movieviewer.repository.MoviesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations
 class MovieDetailViewModelTest {
     private lateinit var movieDetailViewModel: MovieDetailViewModel
 
-    private val movieRepository: MovieRepository = mock()
+    private val moviesRepository: MoviesRepository = mock()
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -28,12 +28,12 @@ class MovieDetailViewModelTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        movieDetailViewModel = MovieDetailViewModel(movieRepository)
+        movieDetailViewModel = MovieDetailViewModel(moviesRepository)
     }
 
     @Test
     fun `test getMovieById calls correct call in repository`() = testCoroutineRule.runBlockingTest {
         movieDetailViewModel.getMovieById("1")
-        verify(movieRepository).getMovieById("1")
+        verify(moviesRepository).getMovieById("1")
     }
 }

@@ -7,7 +7,7 @@ import com.wmw.movieviewer.model.DATABASE_NAME
 import com.wmw.movieviewer.model.MovieDatabase
 import com.wmw.movieviewer.networking.RemoteApi
 import com.wmw.movieviewer.networking.buildApiService
-import com.wmw.movieviewer.repository.MovieRepositoryImpl
+import com.wmw.movieviewer.repository.MoviesRepositoryImpl
 import com.wmw.movieviewer.repository.UserRepositoryImpl
 import com.wmw.movieviewer.ui.LoginViewModelFactory
 import com.wmw.movieviewer.ui.MovieDetailViewModelFactory
@@ -23,19 +23,19 @@ class App : Application() {
 
         private val movieDao by lazy { movieDb.movieDao() }
 
-        private val apiService by lazy { buildApiService() }
+        private val moviesApiService by lazy { buildApiService() }
 
         private val credentialsValidator by lazy { CredentialsValidatorImpl() }
 
-        private val remoteMovieApi by lazy { RemoteApi(apiService) }
+        private val moviesApi by lazy { RemoteApi(moviesApiService) }
 
         private val userRepository by lazy { UserRepositoryImpl(SharedPrefsManager()) }
 
-        val movieRepository: MovieRepositoryImpl by lazy { MovieRepositoryImpl(movieDao, remoteMovieApi) }
+        val moviesRepository: MoviesRepositoryImpl by lazy { MoviesRepositoryImpl(movieDao, moviesApi) }
 
-        val movieViewModelFactory by lazy { MovieViewModelFactory(movieRepository, userRepository) }
+        val movieViewModelFactory by lazy { MovieViewModelFactory(moviesRepository, userRepository) }
 
-        val detailViewModelFactory by lazy { MovieDetailViewModelFactory(movieRepository) }
+        val movieDetailViewModelFactory by lazy { MovieDetailViewModelFactory(moviesRepository) }
 
         val loginViewModelFactory by lazy { LoginViewModelFactory(credentialsValidator, userRepository)}
 

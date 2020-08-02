@@ -3,7 +3,7 @@ package com.wmw.movieviewer.repository
 import androidx.lifecycle.LiveData
 import com.wmw.movieviewer.model.Movie
 
-interface MovieRepository {
+interface MoviesRepository {
     fun getAllMovies(): LiveData<List<Movie>>
 
     suspend fun getMovieById(movieId: String?): Movie
