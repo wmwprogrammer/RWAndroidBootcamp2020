@@ -15,7 +15,7 @@ interface RemoteApiService {
      *             1: Retrieves all information about the film, with defaults options
      * @param format Format in which the data is returned. It's important that it be lowercase: defaults to 'json'
      */
-    @GET("/imdb/top")
+    @GET("imdb/top")
     suspend fun getTopMovies(
         @Query("token") token: String,
         @Query("start") start: Int,

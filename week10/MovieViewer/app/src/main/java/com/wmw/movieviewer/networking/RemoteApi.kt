@@ -7,7 +7,7 @@ import com.wmw.movieviewer.model.Success
 import com.wmw.movieviewer.model.response.MovieTopLevelResponse
 
 
-const val BASE_URL = "https://www.myapifilms.com"
+const val BASE_URL = "https://www.myapifilms.com/"
 
 class RemoteApi(private val apiService: RemoteApiService) {
 
