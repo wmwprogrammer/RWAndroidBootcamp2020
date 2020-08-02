@@ -6,15 +6,15 @@ import androidx.lifecycle.viewModelScope
 import androidx.work.*
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.model.Movie
-import com.wmw.movieviewer.repository.MovieRepositoryImpl
-import com.wmw.movieviewer.repository.UserRepositoryImpl
+import com.wmw.movieviewer.repository.MovieRepository
+import com.wmw.movieviewer.repository.UserRepository
 import com.wmw.movieviewer.worker.SynchronizeMovieDatabaseWorker
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class MovieViewModel(
-        private val repository: MovieRepositoryImpl,
-        private val userRepository: UserRepositoryImpl
+    private val repository: MovieRepository,
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private var currentPage = 1

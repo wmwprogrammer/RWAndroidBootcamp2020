@@ -32,30 +32,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.fetchMovies()
         viewModel.setupSync()
         observeChanges()
-//        startPeriodicJob()
     }
-
-//    private fun startPeriodicJob() {
-//        val constraints = setConstraints()
-//        val worker = buildWorker(constraints)
-//
-//        val workManager = WorkManager.getInstance(this)
-//        workManager.enqueue(worker)
-//    }
-
-//    private fun buildWorker(constraints: Constraints): PeriodicWorkRequest {
-//        return PeriodicWorkRequestBuilder<SynchronizeMovieDatabaseWorker>(1, TimeUnit.HOURS)
-//            .setConstraints(constraints)
-//            .build()
-//    }
-
-//    private fun setConstraints(): Constraints {
-//        return Constraints.Builder()
-//            .setRequiredNetworkType(NetworkType.NOT_ROAMING)
-//            .setRequiresBatteryNotLow(true)
-//            .setRequiresStorageNotLow(true)
-//            .build()
-//    }
 
     private fun observeChanges() {
         viewModel.getMovies().observe(this, Observer {
@@ -86,16 +63,10 @@ class MainActivity : AppCompatActivity() {
             viewModel.fetchMovies()
         })
         viewModel.getMovies()
-
-//        viewModel.getMovies().observe(this, Observer {
-//            if (it != null) {
-//                movieAdapter.setMovies(it)
-//            }
-//        })
     }
 
     private fun movieItemClicked(movie: Movie) {
-        startDetailActivity(this, movie)
+        startDetailActivity(this, movie.id)
     }
 
     private fun movieItemLongClicked(movie: Movie): Boolean {

@@ -4,7 +4,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.abs
 
-//Listener came from the solution
 class LazyLoadingListener(
     private inline val onLastItemReached: () -> Unit
 ) : RecyclerView.OnScrollListener() {

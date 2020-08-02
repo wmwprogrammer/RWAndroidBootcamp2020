@@ -3,12 +3,12 @@ package com.wmw.movieviewer.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.wmw.movieviewer.repository.UserRepositoryImpl
+import com.wmw.movieviewer.repository.UserRepository
 import com.wmw.movieviewer.validators.CredentialsValidator
 
 class LoginViewModel(
     private val credentialsValidator: CredentialsValidator,
-    private val userRepository: UserRepositoryImpl
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     private val loginViewState = MutableLiveData<LoginViewState>()
@@ -34,16 +34,12 @@ class LoginViewModel(
     fun checkUsername() {
         if (!credentialsValidator.isUsernameValid()) {
             loginViewState.value = LoginViewState.InvalidUsername
-//        } else {
-//            loginViewState.value = LoginViewState.ValidUsername
         }
     }
 
     fun checkPassword() {
         if (!credentialsValidator.isPasswordValid()) {
             loginViewState.value = LoginViewState.InvalidPassword
-//        } else {
-//            loginViewState.value = LoginViewState.ValidPassword
         }
     }
 }
@@ -52,6 +48,4 @@ sealed class LoginViewState {
     object UserLoggedIn : LoginViewState()
     object InvalidUsername : LoginViewState()
     object InvalidPassword : LoginViewState()
-//    object ValidUsername : LoginViewState()
-//    object ValidPassword : LoginViewState()
 }

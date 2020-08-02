@@ -12,13 +12,8 @@ import com.wmw.movieviewer.repository.UserRepositoryImpl
 import com.wmw.movieviewer.ui.LoginViewModelFactory
 import com.wmw.movieviewer.ui.MovieDetailViewModelFactory
 import com.wmw.movieviewer.ui.MovieViewModelFactory
-import com.wmw.movieviewer.validators.CredentialsValidator
-import kotlinx.serialization.UnstableDefault
+import com.wmw.movieviewer.validators.CredentialsValidatorImpl
 
-/**
- * Using an App class, so that I can init the movieDb one time.
- */
-@UnstableDefault
 class App : Application() {
     companion object {
         private lateinit var instance: App
@@ -30,17 +25,17 @@ class App : Application() {
 
         private val apiService by lazy { buildApiService() }
 
-        val credentialsValidator by lazy { CredentialsValidator() }
+        private val credentialsValidator by lazy { CredentialsValidatorImpl() }
 
-        val remoteMovieApi by lazy { RemoteApi(apiService) }
+        private val remoteMovieApi by lazy { RemoteApi(apiService) }
 
-        val userRepository by lazy { UserRepositoryImpl(SharedPrefsManager()) }
+        private val userRepository by lazy { UserRepositoryImpl(SharedPrefsManager()) }
 
         val movieRepository: MovieRepositoryImpl by lazy { MovieRepositoryImpl(movieDao, remoteMovieApi) }
 
         val movieViewModelFactory by lazy { MovieViewModelFactory(movieRepository, userRepository) }
 
-        val detailViewModelFactory by lazy { MovieDetailViewModelFactory() }
+        val detailViewModelFactory by lazy { MovieDetailViewModelFactory(movieRepository) }
 
         val loginViewModelFactory by lazy { LoginViewModelFactory(credentialsValidator, userRepository)}
 

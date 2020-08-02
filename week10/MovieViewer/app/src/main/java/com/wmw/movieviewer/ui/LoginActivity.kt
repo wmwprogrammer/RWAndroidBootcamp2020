@@ -2,6 +2,7 @@ package com.wmw.movieviewer.ui
 
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,39 +10,26 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
+import com.wmw.movieviewer.networking.NetworkStatusChecker
 import com.wmw.movieviewer.onClick
 import kotlinx.android.synthetic.main.activity_login.*
 
 fun startLoginActivity(from: Context) = from.startActivity(Intent(from, LoginActivity::class.java))
 
 class LoginActivity : AppCompatActivity() {
-    private val viewModel: LoginViewModel by viewModels { App.loginViewModelFactory}
-//    private val viewModel by lazy {
-//        ViewModelProvider(this, App.loginViewModelFactory).get(LoginViewModel::class.java)
-//    }
-//    private val credentialsValidator by lazy { App.credentialsValidator }
-
-//    private val networkStatusChecker by lazy {
-//        NetworkStatusChecker(
-//            getSystemService(
-//                ConnectivityManager::class.java
-//            )
-//        )
-//    }
+    private val viewModel: LoginViewModel by viewModels { App.loginViewModelFactory }
+    private val networkStatusChecker by lazy {
+        NetworkStatusChecker(getSystemService(ConnectivityManager::class.java))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         setClickListeners()
         observeChanges()
-        viewModel.checkIfUserLoggedIn()
-
-//        networkStatusChecker.performIfConnectedToInternet {
-//           if (viewModel.checkIfUserLoggedIn()) startMainActivity()
-//
-//            //used this method from the solution to avoid setting up a click listener every time
-//            loginButton.onClick { checkCredentials() }
-//        }
+        networkStatusChecker.performIfConnectedToInternet {
+            viewModel.checkIfUserLoggedIn()
+        }
     }
 
     private fun observeChanges() {
@@ -56,16 +44,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    private fun subscribeToData() {
-//        viewModel.getLoginViewState().subscribe(this, ::onLoginViewStateChanged)
-//    }
-
     private fun onLoginViewStateChanged(loginViewState: LoginViewState) = when (loginViewState) {
         LoginViewState.UserLoggedIn -> startMainActivity()
         LoginViewState.InvalidUsername -> showErrorToast("Username must be more than 8 characters")
         LoginViewState.InvalidPassword -> showErrorToast("Password must be greater than 8 characters")
-//        LoginViewState.ValidUsername -> removeUsernameError()
-//        LoginViewState.ValidPassword -> removePasswordError()
     }
 
     private fun startMainActivity() {
@@ -73,24 +55,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
-//    private fun toggleUsernameState() {
-//        if (!credentialsValidator.isUsernameValid()) {
-//            showErrorToast("Username cannot be less than 8 characters")
-//        }
-//    }
-//
-//    private fun togglePasswordState() {
-//        if (!credentialsValidator.isPasswordValid()) {
-//            showErrorToast("Password must be greater than 8 characters")
-//        }
-//    }
-
     private fun showErrorToast(toastText: String) {
         Toast.makeText(this, toastText, Toast.LENGTH_LONG).show()
     }
-
-//    private fun startMainActivity() {
-//        startMainActivity(this)
-//        finish()        //stop the login activity, so that it does not show when hitting back
-//    }
 }

@@ -1,15 +1,12 @@
 package com.wmw.movieviewer.networking
 
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.wmw.movieviewer.App
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.Interceptor
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 private const val HEADER_AUTHORIZATION = "Authorization"
 
@@ -22,19 +19,10 @@ fun buildClient(): OkHttpClient =
         .build()
 
 fun buildRetrofit(): Retrofit {
-    val contentType = "application/json".toMediaType()
-
     return Retrofit.Builder()
         .client(buildClient())
         .baseUrl(BASE_URL)
-        .addConverterFactory(
-            Json(
-                JsonConfiguration(
-                    encodeDefaults = false,
-                    ignoreUnknownKeys = true
-                )
-            ).asConverterFactory(contentType)
-        )
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
 }
 

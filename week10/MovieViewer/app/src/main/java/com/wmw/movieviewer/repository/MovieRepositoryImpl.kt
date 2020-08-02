@@ -10,6 +10,8 @@ import com.wmw.movieviewer.networking.RemoteApi
 open class MovieRepositoryImpl(private val movieDao: MovieDao, private val movieApi: RemoteApi) : MovieRepository {
     override fun getAllMovies(): LiveData<List<Movie>> = movieDao.getAllMoviesSortedByTitle()
 
+    override suspend fun getMovieById(movieId: String?): Movie = movieDao.getMovieById(movieId)
+
     override suspend fun loadMoviesForPage(startingPage: Int, endingPage: Int) {
 
         val moviesList = movieApi.getTopMovies(startingPage, endingPage)
