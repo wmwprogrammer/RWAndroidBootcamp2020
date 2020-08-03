@@ -3,6 +3,7 @@ package com.wmw.movieviewer.di
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.BuildConfig
 import com.wmw.movieviewer.networking.MoviesApiInterface
+import com.wmw.movieviewer.networking.MoviesApi
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -17,39 +18,35 @@ val networkModule = module {
     single(named("BASE_URL")) {
         "https://www.myapifilms.com/"
     }
-    single {
+    single(named("LoggingInterceptor")) {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         interceptor
     }
-    single {
-        val authInterceptor = authorizationInterceptor()
-        authInterceptor
-    }
+    single(named("AuthInterceptor")) { authorizationInterceptor() }
     single {
         val client = OkHttpClient().newBuilder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
-        client.addInterceptor(authorizationInterceptor())
+
+        client.addInterceptor(get<Interceptor>(named("AuthInterceptor")))
         if (BuildConfig.DEBUG) {
             client.addInterceptor(get<HttpLoggingInterceptor>())
         }
         client.build()
     }
-//    single {
-//        Moshi.Builder()
-//            .add(KotlinJsonAdapterFactory())
-//            .build()
-//    }
     single {
         Retrofit.Builder().baseUrl(get<String>(named("BASE_URL")))
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()
     }
-    single {
+    single(named("moviesApiService")) {
         get<Retrofit>().create(MoviesApiInterface::class.java)
+    }
+    single {
+        MoviesApi(get())
     }
 }
 

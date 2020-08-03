@@ -6,22 +6,21 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import org.koin.core.KoinComponent
 
-fun startMainActivity(from: Context) = from.startActivity(Intent(from, MainActivity::class.java))
+fun startMainActivity(from: Context) = from.startActivity(Intent(from, MovieActivity::class.java))
 
-class MainActivity : AppCompatActivity() {
-
-    private val viewModel by viewModels<MovieViewModel> { App.movieViewModelFactory }
+class MovieActivity : AppCompatActivity(), KoinComponent {
+    private val viewModel by inject<MovieViewModel>()
     private val movieAdapter by lazy { MovieAdapter(::movieItemClicked, ::movieItemLongClicked) }
 
     override fun onCreate(savedInstanceState: Bundle?) {

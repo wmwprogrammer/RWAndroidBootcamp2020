@@ -5,20 +5,23 @@ import android.widget.Toast
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.wmw.movieviewer.App
+import com.wmw.movieviewer.repository.MoviesRepository
+import com.wmw.movieviewer.repository.MoviesRepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.UnstableDefault
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
 class SynchronizeMovieDatabaseWorker(context: Context, params: WorkerParameters) :
-    CoroutineWorker(context, params) {
+    CoroutineWorker(context, params), KoinComponent {
 
-    @UnstableDefault
-    private val moviesRepository by lazy { App.moviesRepository }
+    private val moviesRepository by inject<MoviesRepositoryImpl>()
 
-    @UnstableDefault
     override suspend fun doWork(): Result {
-        GlobalScope.launch(Dispatchers.Main) {
+        withContext(Dispatchers.Main) {
             Toast.makeText(App.getAppContext(), "Running Background Sync", Toast.LENGTH_LONG).show()
         }
         moviesRepository.loadMoviesForPage()

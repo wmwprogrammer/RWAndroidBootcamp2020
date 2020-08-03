@@ -3,28 +3,27 @@ package com.wmw.movieviewer.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
-import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
 import kotlinx.android.synthetic.main.activity_detail.*
+import org.koin.android.ext.android.inject
+import org.koin.core.KoinComponent
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 private const val MOVIE_KEY = "movieId"
 
 fun startDetailActivity(from: Context, movieId: String) =
-    from.startActivity(Intent(from, DetailActivity::class.java).apply {
+    from.startActivity(Intent(from, MovieDetailActivity::class.java).apply {
         putExtra(MOVIE_KEY, movieId)
     })
 
-class DetailActivity : AppCompatActivity() {
-
+class MovieDetailActivity : AppCompatActivity(), KoinComponent {
     private val movieId by lazy { intent.getStringExtra(MOVIE_KEY) }
-    private val viewModel by viewModels<MovieDetailViewModel> { App.movieDetailViewModelFactory }
+    private val viewModel by inject<MovieDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

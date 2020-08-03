@@ -8,7 +8,6 @@ interface MoviesApiInterface {
 
     /**
      * This will retreive the top number of movies from the remote api
-     * @param token is the api token to send to the server
      * @param start First film to retrieve: defaults to 1
      * @param end Last film to retrieve. If not reported, the film will recover the start parameter: defaults to 10
      * @param data 0: Retrieves the basic information about the film (chart/top)
@@ -17,7 +16,6 @@ interface MoviesApiInterface {
      */
     @GET("imdb/top")
     suspend fun getTopMovies(
-        @Query("token") token: String,
         @Query("start") start: Int,
         @Query("end") end: Int,
         @Query("data") data: String,

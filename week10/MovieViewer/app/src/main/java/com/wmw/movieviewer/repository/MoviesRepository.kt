@@ -2,8 +2,9 @@ package com.wmw.movieviewer.repository
 
 import androidx.lifecycle.LiveData
 import com.wmw.movieviewer.model.Movie
+import org.koin.core.KoinComponent
 
-interface MoviesRepository {
+interface MoviesRepository: KoinComponent {
     fun getAllMovies(): LiveData<List<Movie>>
 
     suspend fun getMovieById(movieId: String?): Movie

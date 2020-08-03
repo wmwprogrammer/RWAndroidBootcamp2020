@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
+import org.koin.core.KoinComponent
 
 class MovieAdapter(
     private val onMovieClicked: (Movie) -> Unit,
     private val onMovieLongClicked: (Movie) -> Boolean
-) : RecyclerView.Adapter<MovieViewHolder>() {
+) : RecyclerView.Adapter<MovieViewHolder>(), KoinComponent {
 
     private var movies = mutableListOf<Movie>()
 
