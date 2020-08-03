@@ -6,29 +6,46 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.wmw.movieviewer.repository.MoviesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.koin.dsl.module
+import org.koin.test.KoinTest
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
-class MovieDetailViewModelTest {
+class MovieDetailViewModelTest : KoinTest {
     private lateinit var movieDetailViewModel: MovieDetailViewModel
 
     private val moviesRepository: MoviesRepository = mock()
+    private val mockModule = module {
+        single {
+            moviesRepository
+        }
+    }
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    @ExperimentalCoroutinesApi
     @get:Rule
     val testCoroutineRule = TestCoroutineRule()
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        movieDetailViewModel = MovieDetailViewModel(moviesRepository)
+        startKoin {
+            modules(listOf(mockModule))
+        }
+        movieDetailViewModel = MovieDetailViewModel()
+    }
+
+    @After
+    fun tearDown() {
+        stopKoin()
     }
 
     @Test

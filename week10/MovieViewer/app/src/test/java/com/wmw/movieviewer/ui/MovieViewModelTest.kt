@@ -7,17 +7,31 @@ import com.nhaarman.mockitokotlin2.verify
 import com.wmw.movieviewer.repository.MoviesRepository
 import com.wmw.movieviewer.repository.UserRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 import org.junit.Rule
 import org.junit.rules.TestRule
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.koin.dsl.module
+import org.koin.test.KoinTest
 import org.mockito.MockitoAnnotations
 
 @ExperimentalCoroutinesApi
-class MovieViewModelTest {
+class MovieViewModelTest : KoinTest {
     private val moviesRepository: MoviesRepository = mock()
     private val userRepository: UserRepository = mock()
+    private val mockModule = module {
+        single {
+            moviesRepository
+        }
+        single {
+            userRepository
+        }
+    }
+
     private lateinit var movieViewModel: MovieViewModel
 
     @get:Rule
@@ -29,7 +43,15 @@ class MovieViewModelTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        movieViewModel = MovieViewModel(moviesRepository, userRepository)
+        startKoin {
+            modules(listOf(mockModule))
+        }
+        movieViewModel = MovieViewModel()
+    }
+
+    @After
+    fun tearDown() {
+        stopKoin()
     }
 
     @Test
