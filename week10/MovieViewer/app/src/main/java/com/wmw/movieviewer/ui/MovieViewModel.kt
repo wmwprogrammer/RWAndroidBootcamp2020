@@ -20,6 +20,7 @@ class MovieViewModel : ViewModel(), KoinComponent {
 
     private val userRepository by inject<UserRepository>()
     private val moviesRepository by inject<MoviesRepository>()
+
     private var currentPage = 1
 
     fun getMovies(): LiveData<List<Movie>> = moviesRepository.getAllMovies()

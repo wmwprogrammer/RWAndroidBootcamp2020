@@ -2,7 +2,10 @@ package com.wmw.movieviewer
 
 import android.app.Application
 import androidx.room.Room
+import com.wmw.movieviewer.di.dbModule
 import com.wmw.movieviewer.di.networkModule
+import com.wmw.movieviewer.di.repositoryModule
+import com.wmw.movieviewer.di.viewModelModule
 import com.wmw.movieviewer.helper.SharedPrefsManager
 import com.wmw.movieviewer.model.DATABASE_NAME
 import com.wmw.movieviewer.model.MovieDatabase
@@ -55,7 +58,7 @@ class App : Application() {
         startKoin {
             androidLogger()
             androidContext(this@App)
-            modules(listOf(networkModule))
+            modules(listOf(networkModule, viewModelModule, repositoryModule, dbModule))
         }
     }
 }
