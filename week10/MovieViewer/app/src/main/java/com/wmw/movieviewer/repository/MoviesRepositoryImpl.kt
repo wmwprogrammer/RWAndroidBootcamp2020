@@ -9,7 +9,7 @@ import com.wmw.movieviewer.networking.MoviesApi
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-open class MoviesRepositoryImpl() : MoviesRepository, KoinComponent {
+open class MoviesRepositoryImpl : MoviesRepository, KoinComponent {
     private val moviesApi by inject<MoviesApi>()
     private val movieDao by inject<MovieDao>()
     override fun getAllMovies(): LiveData<List<Movie>> = movieDao.getAllMoviesSortedByTitle()

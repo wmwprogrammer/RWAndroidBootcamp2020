@@ -18,7 +18,7 @@ import org.koin.core.inject
 class SynchronizeMovieDatabaseWorker(context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params), KoinComponent {
 
-    private val moviesRepository by inject<MoviesRepositoryImpl>()
+    private val moviesRepository by inject<MoviesRepository>()
 
     override suspend fun doWork(): Result {
         withContext(Dispatchers.Main) {

@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class MovieDetailViewModel() : ViewModel(), KoinComponent {
+class MovieDetailViewModel : ViewModel(), KoinComponent {
     private val selectedLiveMovie = MutableLiveData<Movie>()
     private val repository by inject<MoviesRepository>()
 

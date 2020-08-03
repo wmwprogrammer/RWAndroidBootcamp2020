@@ -2,7 +2,6 @@ package com.wmw.movieviewer.model
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import org.koin.core.KoinComponent
 
 @Dao
 interface MovieDao {

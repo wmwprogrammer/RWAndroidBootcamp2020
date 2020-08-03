@@ -7,9 +7,7 @@ import androidx.work.*
 import com.wmw.movieviewer.App
 import com.wmw.movieviewer.model.Movie
 import com.wmw.movieviewer.repository.MoviesRepository
-import com.wmw.movieviewer.repository.MoviesRepositoryImpl
 import com.wmw.movieviewer.repository.UserRepository
-import com.wmw.movieviewer.repository.UserRepositoryImpl
 import com.wmw.movieviewer.worker.SynchronizeMovieDatabaseWorker
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent

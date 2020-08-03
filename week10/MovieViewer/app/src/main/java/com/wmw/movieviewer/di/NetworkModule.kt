@@ -18,11 +18,12 @@ val networkModule = module {
     single(named("BASE_URL")) {
         "https://www.myapifilms.com/"
     }
-    single(named("LoggingInterceptor")) {
+    single {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         interceptor
     }
+    //this interceptor is not working...I still have to manually put in the auth token in the Api
     single(named("AuthInterceptor")) { authorizationInterceptor() }
     single {
         val client = OkHttpClient().newBuilder()
@@ -42,7 +43,7 @@ val networkModule = module {
             .client(get())
             .build()
     }
-    single(named("moviesApiService")) {
+    single {
         get<Retrofit>().create(MoviesApiInterface::class.java)
     }
     single {

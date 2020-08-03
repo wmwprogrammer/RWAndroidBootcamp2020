@@ -31,13 +31,13 @@ class LoginViewModel(
         }
     }
 
-    fun checkUsername() {
+    private fun checkUsername() {
         if (!credentialsValidator.isUsernameValid()) {
             loginViewState.value = LoginViewState.InvalidUsername
         }
     }
 
-    fun checkPassword() {
+    private fun checkPassword() {
         if (!credentialsValidator.isPasswordValid()) {
             loginViewState.value = LoginViewState.InvalidPassword
         }
