@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="medium_padding">16dp</dimen>
+    <dimen name="layout_weight">1</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="detail_image_width">293dp</dimen>
+    <dimen name="detail_image_height">343dp</dimen>
+    <dimen name="detail_label_height">20dp</dimen>
+    <dimen name="detail_label_width">110dp</dimen>
+    <dimen name="login_field_layout_width">300dp</dimen>
+    <dimen name="login_layout_top">300dp</dimen>
+</resources>
