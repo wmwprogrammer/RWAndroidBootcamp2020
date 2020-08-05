@@ -7,12 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.wmw.movieviewer.model.Movie
 import com.wmw.movieviewer.repository.MoviesRepository
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 
-class MovieDetailViewModel : ViewModel(), KoinComponent {
+class MovieDetailViewModel(private val repository: MoviesRepository) : ViewModel() {
     private val selectedLiveMovie = MutableLiveData<Movie>()
-    private val repository by inject<MoviesRepository>()
 
     fun getMovieById(movieId: String) {
         viewModelScope.launch {

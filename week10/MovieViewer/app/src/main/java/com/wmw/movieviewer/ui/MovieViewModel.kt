@@ -10,14 +10,12 @@ import com.wmw.movieviewer.repository.MoviesRepository
 import com.wmw.movieviewer.repository.UserRepository
 import com.wmw.movieviewer.worker.SynchronizeMovieDatabaseWorker
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
 import java.util.concurrent.TimeUnit
-import org.koin.core.inject
 
-class MovieViewModel : ViewModel(), KoinComponent {
-
-    private val userRepository by inject<UserRepository>()
-    private val moviesRepository by inject<MoviesRepository>()
+class MovieViewModel(
+    private val moviesRepository: MoviesRepository,
+    private val userRepository: UserRepository
+) : ViewModel() {
 
     private var currentPage = 1
 

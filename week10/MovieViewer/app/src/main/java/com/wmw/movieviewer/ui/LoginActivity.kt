@@ -6,18 +6,17 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.wmw.movieviewer.App
 import com.wmw.movieviewer.R
 import com.wmw.movieviewer.networking.NetworkStatusChecker
 import com.wmw.movieviewer.onClick
 import kotlinx.android.synthetic.main.activity_login.*
+import org.koin.android.ext.android.inject
 
 fun startLoginActivity(from: Context) = from.startActivity(Intent(from, LoginActivity::class.java))
 
 class LoginActivity : AppCompatActivity() {
-    private val viewModel: LoginViewModel by viewModels { App.loginViewModelFactory }
+    private val viewModel by inject<LoginViewModel>()
     private val networkStatusChecker by lazy {
         NetworkStatusChecker(getSystemService(ConnectivityManager::class.java))
     }

@@ -10,7 +10,6 @@ import com.wmw.movieviewer.R
 import com.wmw.movieviewer.model.Movie
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.koin.android.ext.android.inject
-import org.koin.core.KoinComponent
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -21,7 +20,7 @@ fun startDetailActivity(from: Context, movieId: String) =
         putExtra(MOVIE_KEY, movieId)
     })
 
-class MovieDetailActivity : AppCompatActivity(), KoinComponent {
+class MovieDetailActivity : AppCompatActivity() {
     private val movieId by lazy { intent.getStringExtra(MOVIE_KEY) }
     private val viewModel by inject<MovieDetailViewModel>()
 

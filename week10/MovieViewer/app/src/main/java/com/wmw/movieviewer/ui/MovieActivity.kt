@@ -15,11 +15,10 @@ import com.wmw.movieviewer.model.Movie
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import org.koin.core.KoinComponent
 
 fun startMainActivity(from: Context) = from.startActivity(Intent(from, MovieActivity::class.java))
 
-class MovieActivity : AppCompatActivity(), KoinComponent {
+class MovieActivity : AppCompatActivity() {
     private val viewModel by inject<MovieViewModel>()
     private val movieAdapter by lazy { MovieAdapter(::movieItemClicked, ::movieItemLongClicked) }
 

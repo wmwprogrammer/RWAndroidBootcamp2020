@@ -3,8 +3,7 @@ package com.wmw.movieviewer.helper
 import android.content.Context
 import com.wmw.movieviewer.App
 
-class SharedPrefsManager {
-    private val context = App.getAppContext()
+class SharedPrefsManager(val context: Context) {
     private val prefs =
         context.getSharedPreferences("MovieViewerPreferences", Context.MODE_PRIVATE)
 
