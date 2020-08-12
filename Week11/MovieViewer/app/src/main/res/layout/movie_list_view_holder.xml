@@ -20,7 +20,6 @@
 
     <TextView
         android:id="@+id/movieTextView"
-        android:transitionName="@string/transition_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/medium_padding"

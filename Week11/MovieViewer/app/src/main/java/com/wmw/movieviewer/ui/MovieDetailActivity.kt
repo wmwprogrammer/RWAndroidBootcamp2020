@@ -15,15 +15,15 @@ import org.koin.android.ext.android.inject
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-private const val MOVIE_KEY = "movieId"
-
-fun startDetailActivity(from: Context, movieId: String) =
-    from.startActivity(Intent(from, MovieDetailActivity::class.java).apply {
-        putExtra(MOVIE_KEY, movieId)
-    })
+//private const val MOVIE_KEY = "movieId"
+//
+//fun startDetailActivity(from: Context, movieId: String) =
+//    from.startActivity(Intent(from, MovieDetailActivity::class.java).apply {
+//        putExtra(MOVIE_KEY, movieId)
+//    })
 
 class MovieDetailActivity : AppCompatActivity() {
-    private val movieId by lazy { intent.getStringExtra(MOVIE_KEY) }
+    private val movieId by lazy { intent.getStringExtra(getString(R.string.bundle_extra_item)) }
     private val viewModel by inject<MovieDetailViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

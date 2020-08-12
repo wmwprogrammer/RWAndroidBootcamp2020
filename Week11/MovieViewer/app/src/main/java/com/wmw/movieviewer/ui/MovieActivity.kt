@@ -1,6 +1,5 @@
 package com.wmw.movieviewer.ui
 
-import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,9 +68,10 @@ class MovieActivity : AppCompatActivity() {
     }
 
     private fun movieItemClicked(movie: Movie) {
+//        startDetailActivity(this, movie.id)
         val detailsIntent = Intent(this, MovieDetailActivity::class.java)
-        detailsIntent.putExtra(getString(R.string.bundle_extra_item), movie)
-        val activityOptions = ActivityOptions.makeSceneTransitionAnimation(
+        detailsIntent.putExtra(getString(R.string.bundle_extra_item), movie.id)
+        val activityOptions = ActivityOptionsCompat.makeSceneTransitionAnimation(
             this,
             Pair.create<View, String>(
                 imageView,
@@ -79,7 +80,6 @@ class MovieActivity : AppCompatActivity() {
                 movieTextView,
                 getString(R.string.transition_title)))
         startActivity(detailsIntent, activityOptions.toBundle())
-//        startDetailActivity(this, movie.id)
     }
 
     private fun movieItemLongClicked(movie: Movie): Boolean {

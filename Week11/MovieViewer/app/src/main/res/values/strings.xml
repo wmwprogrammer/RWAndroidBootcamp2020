@@ -10,7 +10,7 @@
     <string name="menu_logout_title">Log Out</string>
     <string name="contentDescription">Movie Poster</string>
 
-    <string name="bundle_extra_item">ITEM</string>
+    <string name="bundle_extra_item">MOVIE_KEY</string>
 
     <string name="transition_image">transition_image</string>
     <string name="transition_title">transition_title</string>

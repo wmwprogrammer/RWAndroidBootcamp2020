@@ -7,6 +7,7 @@
 
     <ImageView
         android:id="@+id/moviePosterImageView"
+        android:transitionName="@string/transition_image"
         android:layout_width="@dimen/detail_image_width"
         android:layout_height="@dimen/detail_image_height"
         android:layout_margin="@dimen/small_padding"
