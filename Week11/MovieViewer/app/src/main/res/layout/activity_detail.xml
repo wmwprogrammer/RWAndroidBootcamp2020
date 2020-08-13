@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/moviePosterImageView"
+        android:transitionName="@string/transition_image"
+        android:layout_width="@dimen/detail_image_width"
+        android:layout_height="@dimen/detail_image_height"
+        android:layout_margin="@dimen/small_padding"
+        android:contentDescription="@string/movie_poster_image"
+        app:layout_constraintBottom_toTopOf="@+id/genre_label_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/star_wars_episode_i" />
+
+    <TextView
+        android:id="@+id/genre_label_textview"
+        android:layout_width="@dimen/detail_label_width"
+        android:layout_height="@dimen/detail_label_height"
+        android:layout_margin="@dimen/small_padding"
+        android:text="@string/genreLabel"
+        app:layout_constraintEnd_toStartOf="@+id/genreTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moviePosterImageView" />
+
+    <TextView
+        android:id="@+id/genreTextView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/detail_label_height"
+        android:layout_margin="@dimen/small_padding"
+        app:layout_constraintStart_toEndOf="@+id/genre_label_textview"
+        app:layout_constraintTop_toBottomOf="@+id/moviePosterImageView" />
+
+    <TextView
+        android:id="@+id/release_date_label_textview"
+        android:layout_width="@dimen/detail_label_width"
+        android:layout_height="@dimen/detail_label_height"
+        android:layout_margin="@dimen/small_padding"
+        android:text="@string/release_date_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genre_label_textview" />
+
+    <TextView
+        android:id="@+id/releaseDateTextView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/detail_label_height"
+        android:layout_margin="@dimen/small_padding"
+        app:layout_constraintStart_toEndOf="@+id/release_date_label_textview"
+        app:layout_constraintTop_toBottomOf="@+id/genreTextView" />
+
+    <TextView
+        android:id="@+id/move_summary_label_textview"
+        android:layout_width="@dimen/detail_label_width"
+        android:layout_height="@dimen/detail_label_height"
+        android:layout_margin="@dimen/small_padding"
+        android:text="@string/movieSummaryLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/release_date_label_textview" />
+
+    <TextView
+        android:id="@+id/movieSummaryTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/small_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/move_summary_label_textview" />
+</androidx.constraintlayout.widget.ConstraintLayout>
